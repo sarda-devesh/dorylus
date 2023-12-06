@@ -7,18 +7,14 @@
 
 cd ${HOME}
 
-
-# Install ZeroMQ.
-if [[ ! $( ldconfig -p | grep zmq ) ]]; then    # Only install if not have been installed.
-    wget https://github.com/zeromq/libzmq/releases/download/v4.3.2/zeromq-4.3.2.tar.gz
-    tar xf zeromq-4.3.2.tar.gz
-    rm zeromq-4.3.2.tar.gz
-    cd zeromq-4.3.2
-    ./configure --with-libsodium=no
-    make
-    sudo make install
-    sudo ldconfig
-    sudo mv ../dorylus/src/utils/zmq.hpp /usr/local/include
-    cd ..
-    rm -rf zeromq-4.3.2
-fi
+# Install ZeroMQ
+wget https://github.com/zeromq/libzmq/releases/download/v4.3.2/zeromq-4.3.2.tar.gz
+tar xf zeromq-4.3.2.tar.gz
+rm zeromq-4.3.2.tar.gz
+cd zeromq-4.3.2
+./configure --with-libsodium=no
+sudo make
+sudo make install
+sudo ldconfig
+sudo mv /home/ubuntu/dorylus/src/common/zmq.hpp /usr/local/include
+cd ..

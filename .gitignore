@@ -25,3 +25,4 @@ inputs/labelstobinary
 inputs/partitioner
 
 wiki
+*.pem

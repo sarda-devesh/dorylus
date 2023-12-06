@@ -23,6 +23,7 @@ include_directories(${CBINC})
 
 
 # Include Threads.
+find_package(ZLIB)
 find_package(Threads REQUIRED)
 
 # Include AWS Lambda runtime.

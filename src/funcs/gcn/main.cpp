@@ -269,6 +269,7 @@ forwardLayer(zmq::socket_t& data_socket, zmq::socket_t& weights_socket, Chunk &c
     }
 }
 
+#define BIND_PORT 7000
 
 /**
  *
@@ -289,25 +290,43 @@ apply_phase(std::string dataserver, std::string weightserver, unsigned dport, un
 
     // Creating identity
     std::vector<char> identity = constructIdentity(chunk);
+    std::cout << "Got idenitty of size " << identity.size() << std::endl;
 
-    zmq::socket_t weights_socket(ctx, ZMQ_DEALER);
-    zmq::socket_t data_socket(ctx, ZMQ_DEALER);
+    zmq::socket_t weights_socket(ctx, ZMQ_REQ);
+    zmq::socket_t data_socket(ctx, ZMQ_REQ);
+    
+    // Create the socket we want to use
+    zmq::socket_t actual_socket(ctx, ZMQ_REQ);
+    actual_socket.setsockopt(ZMQ_IDENTITY, identity.data(), identity.size());
+
     try {
         weights_socket.setsockopt(ZMQ_IDENTITY, identity.data(), identity.size());
         if (RESEND) {
             weights_socket.setsockopt(ZMQ_RCVTIMEO, TIMEOUT_PERIOD);
         }
+        
         char whost_port[50];
         sprintf(whost_port, "tcp://%s:%u", weightserver.c_str(), wport);
+        std::cout << "Weight socket connecting to " << whost_port << std::endl;
         weights_socket.connect(whost_port);
 
         data_socket.setsockopt(ZMQ_IDENTITY, identity.data(), identity.size());
+        data_socket.setsockopt(ZMQ_RCVTIMEO, 0);
         if (RESEND) {
             data_socket.setsockopt(ZMQ_RCVTIMEO, TIMEOUT_PERIOD);
-        }
+        } 
+
         char dhost_port[50];
         sprintf(dhost_port, "tcp://%s:%u", dataserver.c_str(), dport);
+        std::cout << "Data socket connecting to " << dhost_port << std::endl;
         data_socket.connect(dhost_port);
+
+        actual_socket.setsockopt(ZMQ_IDENTITY, identity.data(), identity.size());
+        char actual_port[50];
+        std::cout << "Connecting actual socket to " << dataserver.c_str() << ":" << BIND_PORT << std::endl;
+        sprintf(actual_port, "tcp://%s:%u", dataserver.c_str(), BIND_PORT);
+        std:cout << "Actual socket connect returned " << actual_socket.connect(actual_port);
+
     } catch(std::exception& ex) {
         return constructResp(false, chunk.localId, ex.what());
     }

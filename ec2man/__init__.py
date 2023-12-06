@@ -10,6 +10,21 @@ import argparse
 import ec2man
 import ec2man.instance_manager
 
+import dill
+from multiprocessing import Process  # Use the standard library only
+import os
+
+class DillProcess(Process):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._target = dill.dumps(self._target)  # Save the target function as bytes, using dill
+
+    def run(self):
+        if self._target:
+            self._target = dill.loads(self._target)    # Unpickle the target function before executing
+            self._target(*self._args, **self._kwargs)  # Execute the target function
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/"
 EC2_DIR = BASE_DIR + "ec2man/"
@@ -96,7 +111,6 @@ def process_setup(machine_list = 'machines'):
         ctx = Context(role, instances)
         pickle.dump(ctx, open(CTX_DIR + role + ".context", 'wb'))
 
-
 def get_instances_info(id_list):
     """
     Get instances information through the given instance id.
@@ -108,7 +122,7 @@ def get_instances_info(id_list):
     instances = []
     for res in responses['Reservations']:
         for inst in reversed(res['Instances']):
-            inst_id = inst['InstanceId']
+            inst_id = inst['InstanceId']            
             inst_type = inst['InstanceType']
             inst_place = inst['Placement']['AvailabilityZone']
             prip = inst['PrivateIpAddress']
@@ -153,7 +167,7 @@ def process_target(ctx, target, args):
                 ctx.instances[tid] = handle_command(ec2_cli, ctx, ctx.instances[tid], op, args)
 
             for i in range(len(ctx.instances)):
-                t = multiprocessing.Process(target=thread_handler, args=(i,))
+                t = DillProcess(target=thread_handler, args=(i,))
                 t.start()
                 threads.append(t)
 

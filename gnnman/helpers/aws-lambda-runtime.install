@@ -9,17 +9,16 @@ sudo apt install libcurl4-openssl-dev libssl-dev
 cd ${HOME}
 
 function install_aws_runtime {
-    wget https://github.com/awslabs/aws-lambda-cpp/archive/v0.2.6.tar.gz
-    tar xvzf v0.2.6.tar.gz
-    mv aws-lambda-cpp-0.2.6/ aws-lambda-cpp
+    if [[ ! -d aws-lambda-cpp ]]; then
+        git clone https://github.com/awslabs/aws-lambda-cpp
+    fi
     cd aws-lambda-cpp
-    mkdir build
+    mkdir -p build
     cd build
     cmake .. -DCMAKE_BUILD_TYPE=Release
     make -j
     sudo make install
     cd ../..
-    rm -rf aws-lambda-cpp v0.2.6.tar.gz
 }
 
 # Install AWS-Lambda C++ runtime.

@@ -32,3 +32,7 @@ if [[ ! -d /usr/local/blas/CBLAS ]]; then
     sudo mkdir -p /usr/local/blas
     sudo mv CBLAS /usr/local/blas/
 fi
+
+sudo apt-add-repository universe
+sudo apt-get update
+sudo apt-get install -y libblas-dev libblas64-dev libatlas-base-dev liblapack-dev libopenblas-dev libgsl-dev

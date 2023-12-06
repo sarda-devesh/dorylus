@@ -5,9 +5,12 @@ int recvTensor(zmq::socket_t& socket, Matrix &mat) {
     zmq::message_t tensorHeader(TENSOR_HDR_SIZE);
     zmq::message_t tensorData;
 
+    std::cout << "Calling recv for tensor header of size " << TENSOR_HDR_SIZE << std::endl;
     if (!socket.recv(&tensorHeader)) {
         return 0;
     }
+    std::cout << "Received tensor header" << std::endl;
+
     unsigned resp = parse<unsigned>((char*)tensorHeader.data(), 0);
     if (resp == ERR_HEADER_FIELD) {
         std::cerr << "Got error from server. Consult graph server output" << std::endl;
@@ -15,9 +18,11 @@ int recvTensor(zmq::socket_t& socket, Matrix &mat) {
     }
     std::string name = parseName((char*)tensorHeader.data());
 
+    std::cout << "Calling receive for tensor data" << std::endl;
     if (!socket.recv(&tensorData)) {
         return 0;
     }
+    std::cout << "Received tensor data" << std::endl;
 
     unsigned rows = parse<unsigned>((char*)tensorHeader.data(), 3);
     unsigned cols = parse<unsigned>((char*)tensorHeader.data(), 4);
@@ -33,38 +38,55 @@ int recvTensor(zmq::socket_t& socket, Matrix &mat) {
     return 0;
 }
 
-std::vector<Matrix> reqTensors(zmq::socket_t& socket, Chunk &chunk,
-                        std::vector<std::string>& tensorRequests) {
+void logabbleHeader(void* header, unsigned op, Chunk &chunk) {
+    char *ptr = (char *)header;
+    memcpy(ptr, &op, sizeof(unsigned));
+    std::cout << "Sending data of " << op << " of size " << sizeof(unsigned) << std::endl;
+    memcpy(ptr + sizeof(unsigned), &chunk, sizeof(chunk));
+    std::cout << "Size of chunk is " << sizeof(chunk) << std::endl;
+}
+
+std::vector<Matrix> reqTensors(zmq::socket_t& socket, Chunk &chunk, std::vector<std::string>& tensorRequests) {
 
 #define INIT_PERIOD (5 * 1000u) // 5ms
 #define MAX_PERIOD (500 * 1000u)
 #define EXP_FACTOR 1.5
 
     unsigned sleepPeriod = INIT_PERIOD;
-
     bool empty = true;
     std::vector<Matrix> matrices;
     while (true) {
         zmq::message_t header(HEADER_SIZE);
-        populateHeader(header.data(), OP::PULL, chunk);
+        logabbleHeader(header.data(), OP::PULL, chunk);
+        std::cout << "Sending header of size " << HEADER_SIZE << std::endl;
         socket.send(header, ZMQ_SNDMORE);
+        std::cout << "Socket sent header" << std::endl;
+
         unsigned numTensors = tensorRequests.size();
+        std::cout << "Got numTensors of " << numTensors << std::endl;
+
         for (unsigned u = 0; u < tensorRequests.size(); ++u) {
             std::string& name = tensorRequests[u];
             zmq::message_t tensorHeader(TENSOR_HDR_SIZE);
             populateHeader(tensorHeader.data(), chunk.localId, name.c_str());
+            std::cout << "Populated tensor header of size " << TENSOR_HDR_SIZE << " for name " << name.c_str() << std::endl;
+
             if (u < numTensors - 1) {
                 socket.send(tensorHeader, ZMQ_SNDMORE);
             } else {
                 socket.send(tensorHeader);
             }
+            std::cout << "Sent tensor header " << u << " of size " << tensorHeader.size() << std::endl;
         }
 
         unsigned more = 1;
         empty = false;
         while (more && !empty) {
             Matrix result;
+            std::cout << "Calling recv tensor" << std::endl;
             int ret = recvTensor(socket, result);
+            std::cout << "recvTensor returned val of " << ret << std::endl;
+
             if (ret == -1) {
                 for (auto& M : matrices) deleteMatrix(M);
                 matrices.clear();

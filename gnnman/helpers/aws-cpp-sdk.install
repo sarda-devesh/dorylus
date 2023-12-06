@@ -11,17 +11,16 @@ sudo apt install libcurl4-openssl-dev libssl-dev
 
 
 function install_aws_sdk {
-    wget https://github.com/aws/aws-sdk-cpp/archive/1.7.264.tar.gz
-    tar xzvf 1.7.264.tar.gz
-    mv aws-sdk-cpp-1.7.264/ aws-sdk-cpp
+    if [[ ! -d aws-sdk-cpp ]]; then
+        git clone --recurse-submodules https://github.com/aws/aws-sdk-cpp
+    fi
     cd aws-sdk-cpp
     mkdir build
     cd build
-    cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_ONLY=lambda -DBUILD_SHARED_LIBS=OFF
-    make -j
+    sudo cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_ONLY=lambda -DBUILD_SHARED_LIBS=OFF
+    sudo make -j
     sudo make install
     cd ../..
-    rm -rf aws-sdk-cpp 1.7.264.tar.gz
 }
 
 # Install AWS-SDK.
