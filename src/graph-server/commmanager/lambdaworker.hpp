@@ -51,7 +51,7 @@ public:
     void markFinish(zmq::message_t& client_id, Chunk &chunk);
 
     LambdaComm *manager;
-    zmq::socket_t workersocket;
+    zmq::socket_t actual_socket;
     unsigned wid;
 
     void sendTensor(Matrix &tensor, Chunk &chunk, unsigned &more);

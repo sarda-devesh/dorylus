@@ -53,12 +53,15 @@ WeightComm::~WeightComm() {
 void WeightComm::updateChunkCnt(unsigned chunkCnt) {
     unsigned base = chunkCnt / wsockets.size();
     unsigned remainder = chunkCnt % wsockets.size();
+    std::cout << "Base of " << base << " and remainder of " << remainder;
 
     for (unsigned u = 0; u < remainder; ++u) {
+        std::cout << "Send Info for " << u << " with base " << base + 1;
         sendInfoMessage(wsockets[u % wsockets.size()], base + 1);
     }
 
     for (unsigned u = remainder; u < wsockets.size(); ++u) {
+        std::cout << "Send Info for " << u << " with base " << base + 1;
         sendInfoMessage(wsockets[u % wsockets.size()], base);
     }
 }
@@ -79,6 +82,7 @@ void WeightComm::shutdown() {
 void sendInfoMessage(zmq::socket_t& wsocket, unsigned cnt) {
     zmq::message_t info_header(HEADER_SIZE);
     populateHeader((char*) info_header.data(), OP::INFO, cnt);
+    wsocket.send(info_header, ZMQ_SNDMORE);
     wsocket.send(info_header);
 
     zmq::message_t ack;

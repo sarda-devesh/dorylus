@@ -14,16 +14,12 @@
 ## All these config files are put in the home directory `~/` for convience.
 ##
 
-
 cd $( dirname $0 )/..
-
 EC2MAN_CMD="python3 -m ec2man"
-
 $EC2MAN_CMD setup
 
 # For graph servers.
 echo "Processing context 'graph'..."
-
 ${EC2MAN_CMD} graph dshfile > dshmachines
 ${EC2MAN_CMD} weight all prip > wserverip
 
@@ -39,28 +35,33 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     sed -i "" s/{{GSERVER0}}/$( python3 -m ec2man graph 0 prip )/ kill-all
 fi
 
-${EC2MAN_CMD} graph all put wserverip run/wserverport dshmachines run/*.config run/gserverport run/dataport run/ctrlport run/nodeport run/numlambdasforward run/numlambdasbackward kill-all ~/.aws
-rm -f dshmachines kill-all wserverip
-
 NUM_GRAPH_NODES=$(( $( ${EC2MAN_CMD} graph info | wc -l | awk '{print $1}' ) - 1 ))
 for i in $( seq 0 $(( ${NUM_GRAPH_NODES} - 1 )) ); do
+    sleep 20
     ${EC2MAN_CMD} graph $i prip > myprip
+    sleep 10
     ${EC2MAN_CMD} graph $i put myprip
+    sleep 10
+    ${EC2MAN_CMD} graph $i put myprip wserverip run/wserverport dshmachines run/*.config run/gserverport run/dataport run/ctrlport run/nodeport run/numlambdasforward run/numlambdasbackward kill-all ~/.aws
     rm -f myprip
+    sleep 20
 done
 
 # For weight servers.
 echo "Processing context 'weight'..."
-
-NUM_GRAPH_NODES=$(( $( ${EC2MAN_CMD} weight info | wc -l | awk '{print $1}' ) - 1 ))
-for i in $( seq 0 $(( ${NUM_GRAPH_NODES} - 1 )) ); do
-    ${EC2MAN_CMD} weight $i prip > myprip
-    ${EC2MAN_CMD} weight $i put myprip
-    rm -f myprip
-done
-
 ${EC2MAN_CMD} graph all prip > gserverip
 ${EC2MAN_CMD} weight dshfile > dshmachines
-${EC2MAN_CMD} weight all put gserverip dshmachines run/dataport run/*.config run/gserverport run/wserverport
+NUM_GRAPH_NODES=$(( $( ${EC2MAN_CMD} weight info | wc -l | awk '{print $1}' ) - 1 ))
+for i in $( seq 0 $(( ${NUM_GRAPH_NODES} - 1 )) ); do
+    sleep 20
+    ${EC2MAN_CMD} weight $i prip > myprip
+    sleep 10
+    ${EC2MAN_CMD} weight $i put myprip
+    sleep 10
+    ${EC2MAN_CMD} weight $i put gserverip dshmachines run/dataport run/*.config run/gserverport run/wserverport kill-all
+    rm -f myprip
+    sleep 20
+done
+
 rm -f gserverip
 rm -f dshmachines

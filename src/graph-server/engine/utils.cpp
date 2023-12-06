@@ -3,7 +3,7 @@
 #include <omp.h>
 
 #include <algorithm>
-#include <boost/algorithm/string/classification.hpp>  // Include boost::for is_any_of.
+#include <boost/algorithm/string/classification.hpp> // Include boost::for is_any_of.
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/program_options.hpp>
@@ -19,19 +19,19 @@
 #include <thread>
 #include <unordered_set>
 
-
 // ======== Debug utils ========
 typedef std::vector<std::vector<unsigned>> opTimes;
 
 // Outputs a string to a file
-void outputToFile(std::ofstream &outfile, std::string str) {
+void outputToFile(std::ofstream &outfile, std::string str)
+{
     fileMutex.lock();
     outfile.write(str.c_str(), str.size());
-    outfile << std::endl << std::flush;
+    outfile << std::endl
+            << std::flush;
     fileMutex.unlock();
 }
 // ======== END Debug File utils ========
-
 
 /**
  *
@@ -74,7 +74,8 @@ unsigned Engine::getNodeId() { return nodeId; }
  * Callback for the LambdaComm to access the NodeManager's epoch update
  * broadcast
  */
-void Engine::sendEpochUpdate(unsigned currEpoch) {
+void Engine::sendEpochUpdate(unsigned currEpoch)
+{
     nodeManager.sendEpochUpdate(currEpoch);
 }
 
@@ -84,10 +85,12 @@ void Engine::sendEpochUpdate(unsigned currEpoch) {
  * locally.
  */
 inline void Engine::calcAcc(FeatType *predicts, FeatType *labels,
-                            unsigned vtcsCnt, unsigned featDim) {
+                            unsigned vtcsCnt, unsigned featDim)
+{
     float acc = 0.0;
     float loss = 0.0;
-    for (unsigned i = 0; i < vtcsCnt; i++) {
+    for (unsigned i = 0; i < vtcsCnt; i++)
+    {
         FeatType *currLabel = labels + i * featDim;
         FeatType *currPred = predicts + i * featDim;
         acc += currLabel[argmax(currPred, currPred + featDim)];
@@ -106,7 +109,8 @@ inline void Engine::calcAcc(FeatType *predicts, FeatType *labels,
  * Write engine timing metrics to the logfile.
  *
  */
-void Engine::output() {
+void Engine::output()
+{
     std::ofstream outStream(outFile.c_str());
     if (!outStream.good())
         printLog(nodeId, "Cannot open output file: %s [Reason: %s]",
@@ -149,11 +153,13 @@ void Engine::output() {
     outStream << outBuf << std::endl;
 
     float avgDenom = static_cast<float>(numSyncEpochs);
-    if (pipeline) avgDenom = static_cast<float>(numSyncEpochs * numLambdasForward);
+    if (pipeline)
+        avgDenom = static_cast<float>(numSyncEpochs * numLambdasForward);
 
     sprintf(outBuf, "<EM>: Forward:  Time per stage:");
     outStream << outBuf << std::endl;
-    for (unsigned i = 0; i < numLayers; ++i) {
+    for (unsigned i = 0; i < numLayers; ++i)
+    {
         sprintf(outBuf, "<EM>    Aggregation   %2u  %.3lf ms", i,
                 vecTimeAggregate[i] / (float)avgDenom);
         outStream << outBuf << std::endl;
@@ -173,7 +179,8 @@ void Engine::output() {
 
     sprintf(outBuf, "<EM>: Backward: Time per stage:");
     outStream << outBuf << std::endl;
-    for (unsigned i = numLayers; i < 2 * numLayers; i++) {
+    for (unsigned i = numLayers; i < 2 * numLayers; i++)
+    {
         sprintf(outBuf, "<EM>    Aggregation   %2u  %.3lf ms", i,
                 vecTimeAggregate[i] / (float)avgDenom);
         outStream << outBuf << std::endl;
@@ -192,7 +199,8 @@ void Engine::output() {
     outStream << outBuf << std::endl;
 
     double sum = 0.0;
-    for (double &d : epochTimes) sum += d;
+    for (double &d : epochTimes)
+        sum += d;
     sprintf(outBuf, "<EM>: Average epoch time %.3lf ms",
             sum / (float)epochTimes.size());
     outStream << outBuf << std::endl;
@@ -202,7 +210,8 @@ void Engine::output() {
     outStream << outBuf << std::endl;
 
     // Write benchmarking results to log file.
-    if (master()) {
+    if (master())
+    {
         assert(vecTimeAggregate.size() == 2 * numLayers);
         assert(vecTimeApplyVtx.size() == 2 * numLayers);
         assert(pipeline || vecTimeScatter.size() == 2 * numLayers);
@@ -216,61 +225,67 @@ void Engine::output() {
  * Print engine metrics of processing time.
  *
  */
-void Engine::printEngineMetrics() {
+void Engine::printEngineMetrics()
+{
     nodeManager.barrier();
-    if (master()) {
-// for (unsigned i = 0; i < numNodes; i++) {
-//     if (nodeId == 0) {
+    if (master())
+    {
+        // for (unsigned i = 0; i < numNodes; i++) {
+        //     if (nodeId == 0) {
         gtimers.report();
 
         fprintf(stderr, "[ Node %3u ]  <EM>: Run start time: %s", nodeId, std::ctime(&start_time));
         fprintf(stderr, "[ Node %3u ]  <EM>: Run end time: %s", nodeId, std::ctime(&end_time));
         printLog(nodeId, "<EM>: Backend %s%s", mode == LAMBDA ? "LAMBDA" : (mode == CPU ? "CPU" : "GPU"),
-            (mode == LAMBDA ? std::string(":" + lambdaName).c_str() : ""));
+                 (mode == LAMBDA ? std::string(":" + lambdaName).c_str() : ""));
         {
             std::string dataset = std::string("<EM>: Dataset: ") + datasetDir + " (";
-            for (int i = 0; i < numLayers; i++) {
+            for (int i = 0; i < numLayers; i++)
+            {
                 dataset += std::to_string(layerConfig[i]) + ", ";
             }
-            dataset += std::to_string(layerConfig[numLayers]) +")";
+            dataset += std::to_string(layerConfig[numLayers]) + ")";
             printLog(nodeId, dataset.c_str());
         }
         printLog(nodeId, "<EM>: staleness: %u", staleness);
         printLog(nodeId, "<EM>: %u sync epochs and %u async epochs",
-                numSyncEpochs, numAsyncEpochs);
+                 numSyncEpochs, numAsyncEpochs);
         printLog(nodeId, "<EM>: Using %u lambdas", numLambdasForward);
         printLog(nodeId, "<EM>: Initialization takes %.3lf ms", timeInit);
 
-        if (false) {
+        if (false)
+        {
             float avgDenom = static_cast<float>(numSyncEpochs);
             // if (pipeline) avgDenom = static_cast<float>(numSyncEpochs * numLambdasForward);
             printLog(nodeId, "<EM>: Forward:  Time per stage:");
-            for (unsigned i = 0; i < numLayers; ++i) {
+            for (unsigned i = 0; i < numLayers; ++i)
+            {
                 printLog(nodeId, "<EM>    Aggregation   %2u  %.3lf ms", i,
-                        vecTimeAggregate[i] / (float)(avgDenom));
+                         vecTimeAggregate[i] / (float)(avgDenom));
                 printLog(nodeId, "<EM>    ApplyVertex   %2u  %.3lf ms", i,
-                        vecTimeApplyVtx[i] / (float)avgDenom);
+                         vecTimeApplyVtx[i] / (float)avgDenom);
                 printLog(nodeId, "<EM>    Scatter       %2u  %.3lf ms", i,
-                        vecTimeScatter[i] / (float)avgDenom);
+                         vecTimeScatter[i] / (float)avgDenom);
                 printLog(nodeId, "<EM>    ApplyEdge     %2u  %.3lf ms", i,
-                        vecTimeApplyEdg[i] / (float)avgDenom);
+                         vecTimeApplyEdg[i] / (float)avgDenom);
             }
             printLog(nodeId, "<EM>: Total forward-prop time %.3lf ms",
-                    timeForwardProcess / (float)avgDenom);
+                     timeForwardProcess / (float)avgDenom);
 
             printLog(nodeId, "<EM>: Backward: Time per stage:");
-            for (unsigned i = numLayers; i < 2 * numLayers; i++) {
+            for (unsigned i = numLayers; i < 2 * numLayers; i++)
+            {
                 printLog(nodeId, "<EM>    Aggregation   %2u  %.3lf ms", i,
-                        vecTimeAggregate[i] / (float)(avgDenom));
+                         vecTimeAggregate[i] / (float)(avgDenom));
                 printLog(nodeId, "<EM>    ApplyVertex   %2u  %.3lf ms", i,
-                        vecTimeApplyVtx[i] / (float)avgDenom);
+                         vecTimeApplyVtx[i] / (float)avgDenom);
                 printLog(nodeId, "<EM>    Scatter       %2u  %.3lf ms", i,
-                        vecTimeScatter[i] / (float)avgDenom);
+                         vecTimeScatter[i] / (float)avgDenom);
                 printLog(nodeId, "<EM>    ApplyEdge     %2u  %.3lf ms", i,
-                        vecTimeApplyEdg[i] / (float)avgDenom);
+                         vecTimeApplyEdg[i] / (float)avgDenom);
             }
             printLog(nodeId, "<EM>: Total backward-prop time %.3lf ms",
-                    timeBackwardProcess / (float)avgDenom);
+                     timeBackwardProcess / (float)avgDenom);
 
             printLog(nodeId, "<EM>: Final accuracy %.3lf", accuracy);
         }
@@ -278,16 +293,17 @@ void Engine::printEngineMetrics() {
         printLog(nodeId, "Relaunched Lambda Cnt: %u", resComm->getRelaunchCnt());
     }
     nodeManager.barrier();
-// }
+    // }
 
     nodeManager.barrier();
     double sum = 0.0;
-    for (double &d : epochTimes) sum += d;
+    for (double &d : epochTimes)
+        sum += d;
     printLog(nodeId, "<EM>: Average  sync epoch time %.3lf ms",
              sum / epochTimes.size());
     nodeManager.barrier();
     printLog(nodeId, "<EM>: Average async epoch time %.3lf ms",
-            asyncAvgEpochTime);
+             asyncAvgEpochTime);
 }
 
 /**
@@ -295,7 +311,8 @@ void Engine::printEngineMetrics() {
  * Print my graph's metrics.
  *
  */
-void Engine::printGraphMetrics() {
+void Engine::printGraphMetrics()
+{
     printLog(nodeId,
              "<GM>: %u global vertices, %llu global edges,\n"
              "\t\t%u local vertices, %llu local in edges, %llu local out edges\n"
@@ -310,63 +327,45 @@ void Engine::printGraphMetrics() {
  * Parse command line arguments.
  *
  */
-void
-Engine::parseArgs(int argc, char *argv[]) {
+void Engine::parseArgs(int argc, char *argv[])
+{
     boost::program_options::options_description desc("Allowed options");
-    desc.add_options()
-    ("help", "Produce help message")
+    desc.add_options()("help", "Produce help message")
 
-    ("datasetdir", boost::program_options::value<std::string>(), "Path to the dataset")
-    ("featuresfile", boost::program_options::value<std::string>(), "Path to the file containing the vertex features")
-    ("layerfile", boost::program_options::value<std::string>(), "Layer configuration file")
-    ("labelsfile", boost::program_options::value<std::string>(), "Target labels file")
-    ("dshmachinesfile", boost::program_options::value<std::string>(), "DSH machines file")
-    ("pripfile", boost::program_options::value<std::string>(), "File containing my private ip")
-    ("pubipfile", boost::program_options::value<std::string>(), "File containing my public ip")
+        ("datasetdir", boost::program_options::value<std::string>(), "Path to the dataset")("featuresfile", boost::program_options::value<std::string>(), "Path to the file containing the vertex features")("layerfile", boost::program_options::value<std::string>(), "Layer configuration file")("labelsfile", boost::program_options::value<std::string>(), "Target labels file")("dshmachinesfile", boost::program_options::value<std::string>(), "DSH machines file")("pripfile", boost::program_options::value<std::string>(), "File containing my private ip")("pubipfile", boost::program_options::value<std::string>(), "File containing my public ip")
 
-    ("tmpdir", boost::program_options::value<std::string>(), "Temporary directory")
+            ("tmpdir", boost::program_options::value<std::string>(), "Temporary directory")
 
-    ("dataserverport", boost::program_options::value<unsigned>(), "The port exposing to the lambdas")
-    ("weightserverport", boost::program_options::value<unsigned>(), "The port of the listener on the lambdas")
-    ("wserveripfile", boost::program_options::value<std::string>(), "The file contains the public IP addresses of the weight server")
+                ("dataserverport", boost::program_options::value<unsigned>(), "The port exposing to the lambdas")("weightserverport", boost::program_options::value<unsigned>(), "The port of the listener on the lambdas")("wserveripfile", boost::program_options::value<std::string>(), "The file contains the public IP addresses of the weight server")
 
-    // Default is directed graph!
-    ("undirected", boost::program_options::value<unsigned>()->default_value(unsigned(0), "0"), "Graph type is undirected or not")
+        // Default is directed graph!
+        ("undirected", boost::program_options::value<unsigned>()->default_value(unsigned(0), "0"), "Graph type is undirected or not")
 
-    ("dthreads", boost::program_options::value<unsigned>(), "Number of data threads")
-    ("cthreads", boost::program_options::value<unsigned>(), "Number of compute threads")
+            ("dthreads", boost::program_options::value<unsigned>(), "Number of data threads")("cthreads", boost::program_options::value<unsigned>(), "Number of compute threads")
 
-    ("dataport", boost::program_options::value<unsigned>(), "Port for data communication")
-    ("ctrlport", boost::program_options::value<unsigned>(), "Port start for control communication")
-    ("nodeport", boost::program_options::value<unsigned>(), "Port for node manager")
+                ("dataport", boost::program_options::value<unsigned>(), "Port for data communication")("ctrlport", boost::program_options::value<unsigned>(), "Port start for control communication")("nodeport", boost::program_options::value<unsigned>(), "Port for node manager")
 
-    ("numlambdas", boost::program_options::value<unsigned>()->default_value(unsigned(1), "5"), "Number of lambdas to request at forward")
-    ("numEpochs", boost::program_options::value<unsigned>(), "Number of epochs to run")
-    ("validationFrequency", boost::program_options::value<unsigned>(), "Number of epochs to run before validation")
+                    ("numlambdas", boost::program_options::value<unsigned>()->default_value(unsigned(1), "5"), "Number of lambdas to request at forward")("numEpochs", boost::program_options::value<unsigned>(), "Number of epochs to run")("validationFrequency", boost::program_options::value<unsigned>(), "Number of epochs to run before validation")
 
-    ("MODE", boost::program_options::value<unsigned>(), "0: Lambda, 1: GPU, 2: CPU")
-    ("pipeline", boost::program_options::value<bool>(), "0: Sequential, 1: Pipelined")
-    ("gnn", boost::program_options::value<std::string>(), "GNN type: [GCN | GAT]")
-    ("staleness", boost::program_options::value<unsigned>()->default_value(unsigned(UINT_MAX)),
-      "Bound on staleness")
-    ("timeout_ratio", boost::program_options::value<unsigned>()->default_value(unsigned(1)),
-        "How long to wait for relaunch")
-    ;
+                        ("MODE", boost::program_options::value<unsigned>(), "0: Lambda, 1: GPU, 2: CPU")("pipeline", boost::program_options::value<bool>(), "0: Sequential, 1: Pipelined")("gnn", boost::program_options::value<std::string>(), "GNN type: [GCN | GAT]")("staleness", boost::program_options::value<unsigned>()->default_value(unsigned(UINT_MAX)),
+                                                                                                                                                                                                                                                                         "Bound on staleness")("timeout_ratio", boost::program_options::value<unsigned>()->default_value(unsigned(1)),
+                                                                                                                                                                                                                                                                                               "How long to wait for relaunch");
 
     boost::program_options::variables_map vm;
     boost::program_options::store(boost::program_options::command_line_parser(argc, argv).options(desc).allow_unregistered().run(), vm);
     boost::program_options::notify(vm);
 
-    if (vm.count("help")) {
+    if (vm.count("help"))
+    {
         std::cout << desc << std::endl;
         exit(-1);
     }
 
     assert(vm.count("dthreads"));
-    dThreads = vm["dthreads"].as<unsigned>();   // Communicator threads.
+    dThreads = vm["dthreads"].as<unsigned>(); // Communicator threads.
 
     assert(vm.count("cthreads"));
-    cThreads = vm["cthreads"].as<unsigned>();   // Computation threads.
+    cThreads = vm["cthreads"].as<unsigned>(); // Computation threads.
 
     assert(vm.count("datasetdir"));
     datasetDir = vm["datasetdir"].as<std::string>();
@@ -387,7 +386,7 @@ Engine::parseArgs(int argc, char *argv[]) {
     myPrIpFile = vm["pripfile"].as<std::string>();
 
     assert(vm.count("tmpdir"));
-    outFile = vm["tmpdir"].as<std::string>() + "/output_";  // Still needs to append the node id, after node manager set up.
+    outFile = vm["tmpdir"].as<std::string>() + "/output_"; // Still needs to append the node id, after node manager set up.
 
     assert(vm.count("dataserverport"));
     dataserverPort = vm["dataserverport"].as<unsigned>();
@@ -430,11 +429,16 @@ Engine::parseArgs(int argc, char *argv[]) {
 
     assert(vm.count("gnn"));
     std::string gnn_name = vm["gnn"].as<std::string>();
-    if (gnn_name == "GCN") {
+    if (gnn_name == "GCN")
+    {
         gnn_type = GNN::GCN;
-    } else if (gnn_name == "GAT") {
+    }
+    else if (gnn_name == "GAT")
+    {
         gnn_type = GNN::GAT;
-    } else {
+    }
+    else
+    {
         std::cerr << "Unsupported GNN type: " << gnn_name << std::endl;
         exit(-1);
     }
@@ -446,7 +450,7 @@ Engine::parseArgs(int argc, char *argv[]) {
     timeoutRatio = vm["timeout_ratio"].as<unsigned>();
 
     printLog(404, "Parsed configuration: dThreads = %u, cThreads = %u, datasetDir = %s, featuresFile = %s, dshMachinesFile = %s, "
-             "myPrIpFile = %s, undirected = %s, data port set -> %u, control port set -> %u, node port set -> %u",
+                  "myPrIpFile = %s, undirected = %s, data port set -> %u, control port set -> %u, node port set -> %u",
              dThreads, cThreads, datasetDir.c_str(), featuresFile.c_str(), dshMachinesFile.c_str(),
              myPrIpFile.c_str(), undirected ? "true" : "false", data_port, ctrl_port, node_port);
 }
@@ -457,7 +461,8 @@ Engine::parseArgs(int argc, char *argv[]) {
  * Read in the layer configuration file.
  *
  */
-void Engine::readLayerConfigFile(std::string &layerConfigFileName) {
+void Engine::readLayerConfigFile(std::string &layerConfigFileName)
+{
     std::ifstream infile(layerConfigFileName.c_str());
     if (!infile.good())
         printLog(nodeId,
@@ -468,11 +473,13 @@ void Engine::readLayerConfigFile(std::string &layerConfigFileName) {
 
     // Loop through each line.
     std::string line;
-    while (!infile.eof()) {
+    while (!infile.eof())
+    {
         std::getline(infile, line);
         boost::algorithm::trim(line);
 
-        if (line.length() > 0) layerConfig.push_back(std::stoul(line));
+        if (line.length() > 0)
+            layerConfig.push_back(std::stoul(line));
     }
 
     assert(layerConfig.size() > 1);
@@ -483,16 +490,20 @@ void Engine::readLayerConfigFile(std::string &layerConfigFileName) {
  * Read in the initial features file.
  *
  */
-void Engine::readFeaturesFile(std::string &featuresFileName) {
+void Engine::readFeaturesFile(std::string &featuresFileName)
+{
     bool cache = true;
-    if (cache) {
+    if (cache)
+    {
         std::string cacheFeatsFile = datasetDir + "feats" + std::to_string(layerConfig[0]) + "." + std::to_string(nodeId) + ".bin";
         std::ifstream infile(cacheFeatsFile.c_str());
-        if (!infile.good()) {
+        if (!infile.good())
+        {
             printLog(nodeId, "No feature cache, loading raw data...",
                      cacheFeatsFile.c_str(), std::strerror(errno));
-        } else {
-            printLog(nodeId, "Loading feature cache from %s...", cacheFeatsFile.c_str());
+        }
+        else
+        {
             infile.read((char *)forwardVerticesInitData, sizeof(FeatType) * graph.localVtxCnt * layerConfig[0]);
             infile.read((char *)forwardGhostInitData, sizeof(FeatType) * graph.srcGhostCnt * layerConfig[0]);
             infile.close();
@@ -516,15 +527,19 @@ void Engine::readFeaturesFile(std::string &featuresFileName) {
 
     feature_vec.resize(featDim);
     while (infile.read(reinterpret_cast<char *>(&feature_vec[0]),
-                       sizeof(FeatType) * featDim)) {
+                       sizeof(FeatType) * featDim))
+    {
         // Set the vertex's initial values, if it is one of my local vertices /
         // ghost vertices.
-        if (graph.containsSrcGhostVtx(gvid)) {  // Ghost vertex.
+        if (graph.containsSrcGhostVtx(gvid))
+        { // Ghost vertex.
             FeatType *actDataPtr = getVtxFeat(
                 forwardGhostInitData,
                 graph.srcGhostVtcs[gvid] - graph.localVtxCnt, featDim);
             memcpy(actDataPtr, feature_vec.data(), featDim * sizeof(FeatType));
-        } else if (graph.containsVtx(gvid)) {  // Local vertex.
+        }
+        else if (graph.containsVtx(gvid))
+        { // Local vertex.
             FeatType *actDataPtr = getVtxFeat(
                 forwardVerticesInitData, graph.globaltoLocalId[gvid], featDim);
             memcpy(actDataPtr, feature_vec.data(), featDim * sizeof(FeatType));
@@ -534,14 +549,17 @@ void Engine::readFeaturesFile(std::string &featuresFileName) {
     infile.close();
     assert(gvid == graph.globalVtxCnt);
 
-    if (cache) {
+    if (cache)
+    {
         std::string cacheFeatsFile = datasetDir + "feats" + std::to_string(layerConfig[0]) + "." + std::to_string(nodeId) + ".bin";
         std::ifstream infile(cacheFeatsFile.c_str());
-        if (infile.good()) {
+        if (infile.good())
+        {
             return;
         }
         std::ofstream outfile(cacheFeatsFile.c_str());
-        if (!outfile.good()) {
+        if (!outfile.good())
+        {
             printLog(nodeId, "Cannot open output cache file: %s [Reason: %s]",
                      cacheFeatsFile.c_str(), std::strerror(errno));
         }
@@ -556,7 +574,9 @@ void Engine::readFeaturesFile(std::string &featuresFileName) {
  * Read in the labels file, store the labels in one-hot format.
  *
  */
-void Engine::readLabelsFile(std::string &labelsFileName) {
+void Engine::readLabelsFile(std::string &labelsFileName)
+{
+    // printLog(nodeId, "Reading in file %s", labelsFileName.c_str());
     std::ifstream infile(labelsFileName.c_str());
     if (!infile.good())
         printLog(nodeId, "Cannot open labels file: %s [Reason: %s]",
@@ -567,6 +587,7 @@ void Engine::readLabelsFile(std::string &labelsFileName) {
     LabelsHeaderType fHeader;
     infile.read((char *)&fHeader, sizeof(LabelsHeaderType));
     assert(fHeader.labelKinds == layerConfig[numLayers]);
+    // printLog(nodeId, "Reading in header");
 
     unsigned gvid = 0;
 
@@ -574,10 +595,12 @@ void Engine::readLabelsFile(std::string &labelsFileName) {
     unsigned curr;
     FeatType one_hot_arr[lKinds] = {0};
 
-    while (infile.read(reinterpret_cast<char *>(&curr), sizeof(unsigned))) {
+    while (infile.read(reinterpret_cast<char *>(&curr), sizeof(unsigned)))
+    {
         // Set the vertex's label values, if it is one of my local vertices & is
         // labeled.
-        if (graph.containsVtx(gvid)) {
+        if (graph.containsVtx(gvid))
+        {
             // Convert into a one-hot array.
             assert(curr < lKinds);
             memset(one_hot_arr, 0, lKinds * sizeof(FeatType));
@@ -592,20 +615,23 @@ void Engine::readLabelsFile(std::string &labelsFileName) {
     }
 
     infile.close();
+    // printLog(nodeId, "Reading in complete file");
     assert(gvid == graph.globalVtxCnt);
 }
 
-void Engine::loadChunks() {
+void Engine::loadChunks()
+{
     unsigned vtcsCnt = graph.localVtxCnt;
-    for (unsigned cid = 0; cid < numLambdasForward; ++cid) {
+    for (unsigned cid = 0; cid < numLambdasForward; ++cid)
+    {
         unsigned chunkSize =
             (vtcsCnt + numLambdasForward - 1) / numLambdasForward;
         unsigned lowBound = cid * chunkSize;
         unsigned upBound = std::min(lowBound + chunkSize, vtcsCnt);
 
-        schQueue.push(Chunk { cid, nodeId * numLambdasForward + cid,
+        schQueue.push(Chunk{cid, nodeId * numLambdasForward + cid,
                             lowBound, upBound, 0, PROP_TYPE::FORWARD,
-                            START_EPOCH + 1, true });
+                            START_EPOCH + 1, true});
     }
 
     currEpoch = START_EPOCH;
@@ -622,24 +648,30 @@ void Engine::loadChunks() {
 /********************************* SC utils *********************************/
 void Engine::verticesPushOut(unsigned receiver, unsigned totCnt,
                              unsigned *lvids, FeatType *inputTensor,
-                             unsigned featDim, Chunk &c) {
+                             unsigned featDim, Chunk &c)
+{
     zmq::message_t msg(DATA_HEADER_SIZE +
                        (sizeof(unsigned) + sizeof(FeatType) * featDim) *
                            totCnt);
     char *msgPtr = (char *)(msg.data());
     sprintf(msgPtr, NODE_ID_HEADER, receiver);
     msgPtr += NODE_ID_DIGITS;
-    unsigned featLayer;
-    if (gnn_type == GNN::GCN) { // YIFAN: fix this
+    unsigned featLayer = 0;
+    if (gnn_type == GNN::GCN)
+    { // YIFAN: fix this
         featLayer = c.dir == PROP_TYPE::FORWARD
-                  ? c.layer : c.layer - 1;
-    } else if (gnn_type == GNN::GAT) {
+                        ? c.layer
+                        : c.layer - 1;
+    }
+    else if (gnn_type == GNN::GAT)
+    {
         featLayer = c.layer - 1;
     }
     populateHeader(msgPtr, nodeId, totCnt, featDim, featLayer, c.dir);
     msgPtr += sizeof(unsigned) * 5;
 
-    for (unsigned i = 0; i < totCnt; ++i) {
+    for (unsigned i = 0; i < totCnt; ++i)
+    {
         *(unsigned *)msgPtr = graph.localToGlobalId[lvids[i]];
         msgPtr += sizeof(unsigned);
         FeatType *dataPtr = getVtxFeat(inputTensor, lvids[i], featDim);
@@ -653,19 +685,25 @@ void Engine::verticesPushOut(unsigned receiver, unsigned totCnt,
 // to a vertex feature. Both src vtx features and dst vtx features included in
 // edgsTensor. [srcV Feats (local inEdge cnt); dstV Feats (local inEdge cnt)]
 FeatType **Engine::srcVFeats2eFeats(FeatType *vtcsTensor, FeatType *ghostTensor,
-                                    unsigned vtcsCnt, unsigned featDim) {
+                                    unsigned vtcsCnt, unsigned featDim)
+{
     FeatType **eVtxFeatsBuf = new FeatType *[2 * graph.localInEdgeCnt];
     FeatType **eSrcVtxFeats = eVtxFeatsBuf;
     FeatType **eDstVtxFeats = eSrcVtxFeats + graph.localInEdgeCnt;
 
     unsigned long long edgeItr = 0;
-    for (unsigned lvid = 0; lvid < graph.localVtxCnt; ++lvid) {
+    for (unsigned lvid = 0; lvid < graph.localVtxCnt; ++lvid)
+    {
         for (unsigned long long eid = graph.forwardAdj.columnPtrs[lvid];
-             eid < graph.forwardAdj.columnPtrs[lvid + 1]; ++eid) {
+             eid < graph.forwardAdj.columnPtrs[lvid + 1]; ++eid)
+        {
             unsigned srcVid = graph.forwardAdj.rowIdxs[eid];
-            if (srcVid < graph.localVtxCnt) {
+            if (srcVid < graph.localVtxCnt)
+            {
                 eSrcVtxFeats[edgeItr] = getVtxFeat(vtcsTensor, srcVid, featDim);
-            } else {
+            }
+            else
+            {
                 eSrcVtxFeats[edgeItr] = getVtxFeat(
                     ghostTensor, srcVid - graph.localVtxCnt, featDim);
             }
@@ -680,19 +718,25 @@ FeatType **Engine::srcVFeats2eFeats(FeatType *vtcsTensor, FeatType *ghostTensor,
 // similar to srcVFeats2eFeats, but based on outEdges of local vertices.
 // [dstV Feats (local outEdge cnt); srcV Feats (local outEdge cnt)]
 FeatType **Engine::dstVFeats2eFeats(FeatType *vtcsTensor, FeatType *ghostTensor,
-                                    unsigned vtcsCnt, unsigned featDim) {
+                                    unsigned vtcsCnt, unsigned featDim)
+{
     FeatType **eVtxFeatsBuf = new FeatType *[2 * graph.localOutEdgeCnt];
     FeatType **eSrcVtxFeats = eVtxFeatsBuf;
     FeatType **eDstVtxFeats = eSrcVtxFeats + graph.localOutEdgeCnt;
 
     unsigned long long edgeItr = 0;
-    for (unsigned lvid = 0; lvid < graph.localVtxCnt; ++lvid) {
+    for (unsigned lvid = 0; lvid < graph.localVtxCnt; ++lvid)
+    {
         for (unsigned long long eid = graph.backwardAdj.rowPtrs[lvid];
-             eid < graph.backwardAdj.rowPtrs[lvid + 1]; ++eid) {
+             eid < graph.backwardAdj.rowPtrs[lvid + 1]; ++eid)
+        {
             unsigned srcVid = graph.backwardAdj.columnIdxs[eid];
-            if (srcVid < graph.localVtxCnt) {
+            if (srcVid < graph.localVtxCnt)
+            {
                 eSrcVtxFeats[edgeItr] = getVtxFeat(vtcsTensor, srcVid, featDim);
-            } else {
+            }
+            else
+            {
                 eSrcVtxFeats[edgeItr] = getVtxFeat(
                     ghostTensor, srcVid - graph.localVtxCnt, featDim);
             }
@@ -704,50 +748,67 @@ FeatType **Engine::dstVFeats2eFeats(FeatType *vtcsTensor, FeatType *ghostTensor,
     return eVtxFeatsBuf;
 }
 
-unsigned Engine::getAbsLayer(const Chunk &chunk) {
+unsigned Engine::getAbsLayer(const Chunk &chunk)
+{
     return chunk.dir == PROP_TYPE::FORWARD
-            ? (chunk.layer)
-            : (2 * numLayers - 1 - chunk.layer);
+               ? (chunk.layer)
+               : (2 * numLayers - 1 - chunk.layer);
 }
 
 /******************************** Layer utils ********************************/
-Chunk Engine::incLayerGCN(const Chunk &chunk) {
+Chunk Engine::incLayerGCN(const Chunk &chunk)
+{
     Chunk nChunk = chunk;
-    if (nChunk.dir == PROP_TYPE::FORWARD) { // Forward pass
+    if (nChunk.dir == PROP_TYPE::FORWARD)
+    { // Forward pass
         nChunk.layer++;
-        if (nChunk.layer == numLayers) { // Forward: last layer
+        if (nChunk.layer == numLayers)
+        {                                     // Forward: last layer
             nChunk.dir = PROP_TYPE::BACKWARD; // Switch dir
             // Merge the forward and backward pass of the last layer
             nChunk.layer--;
         }
-    } else { // Backward pass
-        if (nChunk.layer == 0) { // Epoch ends. Switch dir and inc epoch
+    }
+    else
+    { // Backward pass
+        if (nChunk.layer == 0)
+        { // Epoch ends. Switch dir and inc epoch
             nChunk.dir = PROP_TYPE::FORWARD;
             nChunk.epoch++;
-        } else {
+        }
+        else
+        {
             nChunk.layer--;
         }
     }
     return nChunk;
 }
 
-Chunk Engine::incLayerGAT(const Chunk &chunk) {
+Chunk Engine::incLayerGAT(const Chunk &chunk)
+{
     Chunk nChunk = chunk;
-    if (nChunk.dir == PROP_TYPE::FORWARD) { // Forward
+    if (nChunk.dir == PROP_TYPE::FORWARD)
+    { // Forward
         nChunk.layer++;
-    } else { // Backward
-        if (nChunk.layer == 0) { // Epoch ends. Switch dir and inc epoch
+    }
+    else
+    { // Backward
+        if (nChunk.layer == 0)
+        { // Epoch ends. Switch dir and inc epoch
             nChunk.dir = PROP_TYPE::FORWARD;
             nChunk.vertex = true; // reset for a new epoch
             nChunk.epoch++;
-        } else {
+        }
+        else
+        {
             nChunk.layer--;
         }
     }
     return nChunk;
 }
 
-bool Engine::isLastLayer(const Chunk &chunk) {
+bool Engine::isLastLayer(const Chunk &chunk)
+{
     return chunk.dir == PROP_TYPE::BACKWARD &&
            chunk.layer == 0 && chunk.vertex;
 }

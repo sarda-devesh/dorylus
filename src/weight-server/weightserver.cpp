@@ -60,6 +60,9 @@ WeightServer::run() {
         worker_threads[i]->detach();
     }
 
+    worker_threads.push_back(new std::thread(std::bind(&ServerWorker::lambda_worker, workers[0])));
+    worker_threads[NUM_LISTENERS]->detach();
+
     std::thread proxyThd([&] {
         try {
             zmq::proxy(static_cast<void *>(frontend), static_cast<void *>(backend), nullptr);
@@ -79,6 +82,8 @@ void WeightServer::stopWorkers() {
         delete worker_threads[i];
         delete workers[i];
     }
+    
+    delete worker_threads[NUM_LISTENERS];
 }
 
 /**
@@ -326,6 +331,7 @@ WeightServer::initWServerComm(std::vector<std::string> &allNodeIps) {
     // Need to use the private IP because of port restrictions.
     char hostPort[50];
     sprintf(hostPort, "tcp://%s:%u", myIp.c_str(), serverPort);
+    std::cout << "Publisher binding to port " << serverPort << std::endl;
     publisher.bind(hostPort);
     for (std::string &ipStr : allNodeIps) {
         if (ipStr != myIp) {

@@ -17,7 +17,7 @@ EC2MAN_CMD="python3 -m ec2man"
 
 
 # Loop through all three contexts.
-for CTX in coord; do
+for CTX in weight; do
 
     echo "Processing context '${CTX}'..."
 

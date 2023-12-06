@@ -1,0 +1,1461 @@
+[33;1mKilling existing 'graphserver' processes...[0m
+graphserver: no process found
+graphserver: no process found
+graphserver: no process found
+graphserver: no process found
+graphserver: no process found
+graphserver: no process found
+graphserver: no process found
+graphserver: no process found
+graphserver: no process found
+graphserver: no process found
+[33;1mRunning GRAPH servers with: [ MARK # 145 ]...[0m
+./build/graphserver --datasetdir /filepool/collab/parts_10/ --featuresfile /filepool/collab/features.bsnap --labelsfile /filepool/collab/labels.bsnap --dshmachinesfile /home/ubuntu/dshmachines --layerfile /home/ubuntu/collab.config --pripfile /home/ubuntu/myprip --dataserverport 55431 --weightserverport 65433 --wserveripfile /home/ubuntu/wserverip --undirected 0 --tmpdir=/home/ubuntu/tmpfiles --cthreads 48 --dthreads 12 --dataport 5000 --ctrlport 7000 --nodeport 6000 --numlambdas 10 --numEpoch 1 --validationFrequency 1 --MODE 0 --pipeline 0 --staleness 4294967295 --gnn GCN --preprocess 0 --timeout_ratio 5
+[ Node 404 ]  Engine starts initialization...
+[ Node 404 ]  Engine starts initialization...
+[ Node 404 ]  Parsed configuration: dThreads = 12, cThreads = 48, datasetDir = /filepool/collab/parts_10/, featuresFile = /filepool/collab/features.bsnap, dshMachinesFile = /home/ubuntu/dshmachines, myPrIpFile = /home/ubuntu/myprip, undirected = false, data port set -> 5000, control port set -> 7000, node port set -> 6000
+[ Node 404 ]  NodeManager starts initialization...
+[ Node 404 ]  Parsed configuration: dThreads = 12, cThreads = 48, datasetDir = /filepool/collab/parts_10/, featuresFile = /filepool/collab/features.bsnap, dshMachinesFile = /home/ubuntu/dshmachines, myPrIpFile = /home/ubuntu/myprip, undirected = false, data port set -> 5000, control port set -> 7000, node port set -> 6000
+[ Node 404 ]  NodeManager starts initialization...
+[ Node   5 ]  Private IP: 172.31.19.111
+[ Node   8 ]  Private IP: 172.31.26.215
+[ Node 500 ]  NodeManager is binding to 6000
+[ Node 500 ]  NodeManager is binding to 6000
+[ Node 404 ]  Engine starts initialization...
+[ Node 404 ]  Engine starts initialization...
+[ Node 404 ]  Engine starts initialization...
+[ Node 404 ]  Parsed configuration: dThreads = 12, cThreads = 48, datasetDir = /filepool/collab/parts_10/, featuresFile = /filepool/collab/features.bsnap, dshMachinesFile = /home/ubuntu/dshmachines, myPrIpFile = /home/ubuntu/myprip, undirected = false, data port set -> 5000, control port set -> 7000, node port set -> 6000
+[ Node 404 ]  NodeManager starts initialization...
+[ Node   1 ]  Private IP: 172.31.20.192
+[ Node 500 ]  NodeManager is binding to 6000
+[ Node 404 ]  Parsed configuration: dThreads = 12, cThreads = 48, datasetDir = /filepool/collab/parts_10/, featuresFile = /filepool/collab/features.bsnap, dshMachinesFile = /home/ubuntu/dshmachines, myPrIpFile = /home/ubuntu/myprip, undirected = false, data port set -> 5000, control port set -> 7000, node port set -> 6000
+[ Node 404 ]  NodeManager starts initialization...
+[ Node   0 ]  Private IP: 172.31.27.242
+[ Node 500 ]  NodeManager is binding to 6000
+[ Node 404 ]  Parsed configuration: dThreads = 12, cThreads = 48, datasetDir = /filepool/collab/parts_10/, featuresFile = /filepool/collab/features.bsnap, dshMachinesFile = /home/ubuntu/dshmachines, myPrIpFile = /home/ubuntu/myprip, undirected = false, data port set -> 5000, control port set -> 7000, node port set -> 6000
+[ Node 404 ]  NodeManager starts initialization...
+[ Node   9 ]  Private IP: 172.31.21.103
+[ Node 500 ]  NodeManager is binding to 6000
+[ Node 404 ]  Engine starts initialization...
+[ Node 404 ]  Engine starts initialization...
+[ Node 404 ]  Engine starts initialization...
+[ Node 404 ]  Parsed configuration: dThreads = 12, cThreads = 48, datasetDir = /filepool/collab/parts_10/, featuresFile = /filepool/collab/features.bsnap, dshMachinesFile = /home/ubuntu/dshmachines, myPrIpFile = /home/ubuntu/myprip, undirected = false, data port set -> 5000, control port set -> 7000, node port set -> 6000
+[ Node 404 ]  NodeManager starts initialization...
+[ Node 404 ]  Parsed configuration: dThreads = 12, cThreads = 48, datasetDir = /filepool/collab/parts_10/, featuresFile = /filepool/collab/features.bsnap, dshMachinesFile = /home/ubuntu/dshmachines, myPrIpFile = /home/ubuntu/myprip, undirected = false, data port set -> 5000, control port set -> 7000, node port set -> 6000
+[ Node 404 ]  NodeManager starts initialization...
+[ Node   4 ]  Private IP: 172.31.20.10
+[ Node   7 ]  Private IP: 172.31.20.122
+[ Node 404 ]  Parsed configuration: dThreads = 12, cThreads = 48, datasetDir = /filepool/collab/parts_10/, featuresFile = /filepool/collab/features.bsnap, dshMachinesFile = /home/ubuntu/dshmachines, myPrIpFile = /home/ubuntu/myprip, undirected = false, data port set -> 5000, control port set -> 7000, node port set -> 6000
+[ Node 404 ]  NodeManager starts initialization...
+[ Node 500 ]  NodeManager is binding to 6000
+[ Node   3 ]  Private IP: 172.31.29.152
+[ Node 500 ]  NodeManager is binding to 6000
+[ Node 500 ]  NodeManager is binding to 6000
+[ Node 404 ]  Engine starts initialization...
+[ Node 404 ]  Parsed configuration: dThreads = 12, cThreads = 48, datasetDir = /filepool/collab/parts_10/, featuresFile = /filepool/collab/features.bsnap, dshMachinesFile = /home/ubuntu/dshmachines, myPrIpFile = /home/ubuntu/myprip, undirected = false, data port set -> 5000, control port set -> 7000, node port set -> 6000
+[ Node 404 ]  Engine starts initialization...
+[ Node 404 ]  NodeManager starts initialization...
+[ Node   6 ]  Private IP: 172.31.24.51
+[ Node 500 ]  NodeManager is binding to 6000
+[ Node 404 ]  Parsed configuration: dThreads = 12, cThreads = 48, datasetDir = /filepool/collab/parts_10/, featuresFile = /filepool/collab/features.bsnap, dshMachinesFile = /home/ubuntu/dshmachines, myPrIpFile = /home/ubuntu/myprip, undirected = false, data port set -> 5000, control port set -> 7000, node port set -> 6000
+[ Node 404 ]  NodeManager starts initialization...
+[ Node   2 ]  Private IP: 172.31.17.50
+[ Node 500 ]  NodeManager is binding to 6000
+[ Node   0 ]  NodeManager initialization complete.
+[ Node   0 ]  CommManager starts initialization...
+[ Node   3 ]  NodeManager initialization complete.
+[ Node   0 ]  CommManager starts initialization...
+[ Node   1 ]  NodeManager initialization complete.
+[ Node   0 ]  CommManager starts initialization...
+[ Node   8 ]  NodeManager initialization complete.
+[ Node   0 ]  CommManager starts initialization...
+[ Node   2 ]  NodeManager initialization complete.
+[ Node   0 ]  CommManager starts initialization...
+[ Node   7 ]  NodeManager initialization complete.
+[ Node   0 ]  CommManager starts initialization...
+[ Node   5 ]  NodeManager initialization complete.
+[ Node   0 ]  CommManager starts initialization...
+[ Node   9 ]  NodeManager initialization complete.
+[ Node   0 ]  CommManager starts initialization...
+[ Node   6 ]  NodeManager initialization complete.
+[ Node   0 ]  CommManager starts initialization...
+[ Node   4 ]  NodeManager initialization complete.
+[ Node   0 ]  CommManager starts initialization...
+[ Node   0 ]  Data port binding to 5000
+[ Node   0 ]  Host port binding to port 7001
+[ Node   0 ]  Host port binding to port 7002
+[ Node   0 ]  Host port binding to port 7003
+[ Node   0 ]  Host port binding to port 7004
+[ Node   0 ]  Host port binding to port 7005
+[ Node   0 ]  Host port binding to port 7006
+[ Node   0 ]  Host port binding to port 7007
+[ Node   0 ]  Host port binding to port 7008
+[ Node   0 ]  Host port binding to port 7009
+[ Node   0 ]  CommManager initialization complete.
+[ Node   1 ]  CommManager initialization complete.
+[ Node   2 ]  CommManager initialization complete.
+[ Node   3 ]  CommManager initialization complete.
+[ Node   4 ]  CommManager initialization complete.
+[ Node   6 ]  CommManager initialization complete.
+[ Node   9 ]  CommManager initialization complete.
+[ Node   5 ]  CommManager initialization complete.
+[ Node   7 ]  CommManager initialization complete.
+[ Node   8 ]  CommManager initialization complete.
+[ Node   6 ]  <GM>: 111059956 global vertices, 1615685872 global edges,
+		10781952 local vertices, 72053155 local in edges, 85700374 local out edges
+		7324778 out ghost vertices, 6390258 in ghost vertices
+[ Node   6 ]  Print graph stats
+[ Node   6 ]  Created forwardVerticesInitData
+[ Node   6 ]  Created forwardGhostInitData
+[ Node   6 ]  Created localVerticesLabels
+[ Node   5 ]  <GM>: 111059956 global vertices, 1615685872 global edges,
+		11439621 local vertices, 69740352 local in edges, 65208072 local out edges
+		7826357 out ghost vertices, 5578979 in ghost vertices
+[ Node   5 ]  Print graph stats
+[ Node   5 ]  Created forwardVerticesInitData
+[ Node   5 ]  Created forwardGhostInitData
+[ Node   5 ]  Created localVerticesLabels
+[ Node   9 ]  <GM>: 111059956 global vertices, 1615685872 global edges,
+		10781991 local vertices, 164093694 local in edges, 142939598 local out edges
+		12566222 out ghost vertices, 6119099 in ghost vertices
+[ Node   9 ]  Print graph stats
+[ Node   9 ]  Created forwardVerticesInitData
+[ Node   9 ]  Created forwardGhostInitData
+[ Node   9 ]  Created localVerticesLabels
+[ Node   6 ]  Created featuresFile
+[ Node   7 ]  <GM>: 111059956 global vertices, 1615685872 global edges,
+		11439654 local vertices, 142053437 local in edges, 128336326 local out edges
+		14509830 out ghost vertices, 5827371 in ghost vertices
+[ Node   7 ]  Print graph stats
+[ Node   7 ]  Created forwardVerticesInitData
+[ Node   7 ]  Created forwardGhostInitData
+[ Node   7 ]  Created localVerticesLabels
+[ Node   5 ]  Created featuresFile
+[ Node   0 ]  <GM>: 111059956 global vertices, 1615685872 global edges,
+		11439721 local vertices, 177856627 local in edges, 189087081 local out edges
+		11044744 out ghost vertices, 7393956 in ghost vertices
+[ Node   0 ]  Created forwardVerticesInitData
+[ Node   0 ]  Created forwardGhostInitData
+[ Node   0 ]  Created localVerticesLabels
+[ Node   8 ]  <GM>: 111059956 global vertices, 1615685872 global edges,
+		10781991 local vertices, 149549309 local in edges, 171450361 local out edges
+		14463169 out ghost vertices, 10726132 in ghost vertices
+[ Node   8 ]  Print graph stats
+[ Node   8 ]  Created forwardVerticesInitData
+[ Node   8 ]  Created forwardGhostInitData
+[ Node   8 ]  Created localVerticesLabels
+[ Node   9 ]  Created featuresFile
+[ Node   4 ]  <GM>: 111059956 global vertices, 1615685872 global edges,
+		10781995 local vertices, 168150952 local in edges, 179731898 local out edges
+		13755527 out ghost vertices, 9561927 in ghost vertices
+[ Node   4 ]  Print graph stats
+[ Node   4 ]  Created forwardVerticesInitData
+[ Node   4 ]  Created forwardGhostInitData
+[ Node   4 ]  Created localVerticesLabels
+[ Node   2 ]  <GM>: 111059956 global vertices, 1615685872 global edges,
+		11391313 local vertices, 192383500 local in edges, 160987185 local out edges
+		15344569 out ghost vertices, 7526012 in ghost vertices
+[ Node   2 ]  Print graph stats
+[ Node   2 ]  Created forwardVerticesInitData
+[ Node   2 ]  Created forwardGhostInitData
+[ Node   2 ]  Created localVerticesLabels
+[ Node   3 ]  <GM>: 111059956 global vertices, 1615685872 global edges,
+		10781992 local vertices, 245911191 local in edges, 283256175 local out edges
+		14836932 out ghost vertices, 10155737 in ghost vertices
+[ Node   3 ]  Print graph stats
+[ Node   3 ]  Created forwardVerticesInitData
+[ Node   3 ]  Created forwardGhostInitData
+[ Node   3 ]  Created localVerticesLabels
+[ Node   7 ]  Created featuresFile
+[ Node   0 ]  Created featuresFile
+[ Node   1 ]  <GM>: 111059956 global vertices, 1615685872 global edges,
+		11439726 local vertices, 233893655 local in edges, 208988802 local out edges
+		19125107 out ghost vertices, 8970887 in ghost vertices
+[ Node   1 ]  Print graph stats
+[ Node   1 ]  Created forwardVerticesInitData
+[ Node   1 ]  Created forwardGhostInitData
+[ Node   1 ]  Created localVerticesLabels
+[ Node   8 ]  Created featuresFile
+[ Node   4 ]  Created featuresFile
+[ Node   2 ]  Created featuresFile
+[ Node   3 ]  Created featuresFile
+[ Node   6 ]  Created labelsFile
+[ Node   6 ]  Binding frontend to port -1624113712
+[ Node   6 ]  Binding backend to port inproc://backend
+[ Node   6 ]  Engine initialization complete.
+[ Node   5 ]  Created labelsFile
+[ Node   5 ]  Binding frontend to port -1484048080
+[ Node   5 ]  Binding backend to port inproc://backend
+[ Node   5 ]  Engine initialization complete.
+[ Node   1 ]  Created featuresFile
+[ Node   9 ]  Created labelsFile
+[ Node   9 ]  Binding frontend to port 846014128
+[ Node   9 ]  Binding backend to port inproc://backend
+[ Node   9 ]  Engine initialization complete.
+[ Node   7 ]  Created labelsFile
+[ Node   7 ]  Binding frontend to port -2020062480
+[ Node   7 ]  Binding backend to port inproc://backend
+[ Node   7 ]  Engine initialization complete.
+[ Node   0 ]  Created labelsFile
+[ Node   0 ]  Creating WeightComm
+[ Node   0 ]  Calling updateChunkCnt
+[ Node   0 ]  Binding frontend to port 1301301680
+[ Node   0 ]  Binding backend to port inproc://backend
+[ Node   0 ]  Setting timeout for actual socket
+[ Node   0 ]  Actual socket connecting to tcp://*:8000
+[ Node   0 ]  Engine initialization complete.
+[ Node   0 ]  Number of epochs: 1, validation frequency: 1
+[ Node   8 ]  Created labelsFile
+[ Node   8 ]  Binding frontend to port -976095216
+[ Node   8 ]  Binding backend to port inproc://backend
+[ Node   8 ]  Engine initialization complete.
+[ Node   4 ]  Created labelsFile
+[ Node   4 ]  Binding frontend to port -817668784
+[ Node   4 ]  Binding backend to port inproc://backend
+[ Node   4 ]  Engine initialization complete.
+[ Node   2 ]  Created labelsFile
+[ Node   2 ]  Binding frontend to port -330728016
+[ Node   2 ]  Binding backend to port inproc://backend
+[ Node   2 ]  Engine initialization complete.
+[ Node   3 ]  Created labelsFile
+[ Node   3 ]  Binding frontend to port 1107350096
+[ Node   3 ]  Binding backend to port inproc://backend
+[ Node   3 ]  Engine initialization complete.
+[ Node   1 ]  Created labelsFile
+[ Node   1 ]  Binding frontend to port -448287152
+[ Node   1 ]  Binding backend to port inproc://backend
+[ Node   1 ]  Engine initialization complete.
+[ Node   6 ]  Sync Epoch 1 starts...
+[ Node   1 ]  Sync Epoch 1 starts...
+[ Node   5 ]  Sync Epoch 1 starts...
+[ Node   7 ]  Sync Epoch 1 starts...
+[ Node   3 ]  Sync Epoch 1 starts...
+[ Node   0 ]  Sync Epoch 1 starts...
+[ Node   4 ]  Sync Epoch 1 starts...
+[ Node   2 ]  Sync Epoch 1 starts...
+[ Node   8 ]  Sync Epoch 1 starts...
+[ Node   9 ]  Sync Epoch 1 starts...
+[ Node   0 ]  Invoking a lambda
+[ Node   6 ]  Calling sendTensors
+[ Node   5 ]  Calling sendTensors
+[ Node   0 ]  Invoking a lambda
+[ Node   8 ]  Calling sendTensors
+[ Node   3 ]  Calling sendTensors
+[ Node   5 ]  Calling sendTensors
+[ Node   2 ]  Calling sendTensors
+[ Node   5 ]  Calling sendTensors
+[ Node   8 ]  Calling sendTensors
+[ Node   5 ]  Calling sendTensors
+[ Node   6 ]  Calling sendTensors
+[ Node   6 ]  Calling sendTensors
+[ Node   5 ]  Calling sendTensors
+[ Node   9 ]  Calling sendTensors
+[ Node   7 ]  Calling sendTensors
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143964 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585709568
+[ Node   6 ]  Calling sendTensors
+[ Node   7 ]  Calling sendTensors
+[ Node   6 ]  Calling sendTensors
+[ Node   6 ]  Calling sendTensors
+[ Node   4 ]  Calling sendTensors
+[ Node   3 ]  Calling sendTensors
+[ Node   9 ]  Calling sendTensors
+[ Node   2 ]  Calling sendTensors
+[ Node   0 ]  Invoking a lambda
+[ Node   4 ]  Calling sendTensors
+[ Node   6 ]  Calling sendTensors
+[ Node   1 ]  Calling sendTensors
+[ Node   5 ]  Calling sendTensors
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143973 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585714176
+[ Node   8 ]  Calling sendTensors
+[ Node   1 ]  Calling sendTensors
+[ Node   0 ]  Invoking a lambda
+[ Node   7 ]  Calling sendTensors
+[ Node   9 ]  Calling sendTensors
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143973 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585714176
+[ Node   4 ]  Calling sendTensors
+[ Node   7 ]  Calling sendTensors
+[ Node   5 ]  Calling sendTensors
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143973 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585714176
+[ Node   8 ]  Calling sendTensors
+[ Node   3 ]  Calling sendTensors
+[ Node   0 ]  Invoking a lambda
+[ Node   6 ]  Calling sendTensors
+[ Node   4 ]  Calling sendTensors
+[ Node   5 ]  Calling sendTensors
+[ Node   1 ]  Calling sendTensors
+[ Node   2 ]  Calling sendTensors
+[ Node   2 ]  Calling sendTensors
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143973 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585714176
+[ Node   3 ]  Calling sendTensors
+[ Node   7 ]  Calling sendTensors
+[ Node   4 ]  Calling sendTensors
+[ Node   9 ]  Calling sendTensors
+[ Node   1 ]  Calling sendTensors
+[ Node   5 ]  Calling sendTensors
+[ Node   0 ]  Invoking a lambda
+[ Node   8 ]  Calling sendTensors
+[ Node   8 ]  Calling sendTensors
+[ Node   9 ]  Calling sendTensors
+[ Node   6 ]  Calling sendTensors
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143973 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585714176
+[ Node   2 ]  Calling sendTensors
+[ Node   1 ]  Calling sendTensors
+[ Node   7 ]  Calling sendTensors
+[ Node   3 ]  Calling sendTensors
+[ Node   4 ]  Calling sendTensors
+[ Node   7 ]  Calling sendTensors
+[ Node   5 ]  Calling sendTensors
+[ Node   6 ]  Calling sendTensors
+[ Node   4 ]  Calling sendTensors
+[ Node   9 ]  Calling sendTensors
+[ Node   9 ]  Calling sendTensors
+[ Node   9 ]  Calling sendTensors
+[ Node   8 ]  Calling sendTensors
+[ Node   9 ]  Calling sendTensors
+[ Node   7 ]  Calling sendTensors
+[ Node   7 ]  Calling sendTensors
+[ Node   0 ]  Invoking a lambda
+[ Node   8 ]  Calling sendTensors
+[ Node   8 ]  Calling sendTensors
+[ Node   2 ]  Calling sendTensors
+[ Node   2 ]  Calling sendTensors
+[ Node   9 ]  Calling sendTensors
+[ Node   7 ]  Calling sendTensors
+[ Node   2 ]  Calling sendTensors
+[ Node   2 ]  Calling sendTensors
+[ Node   0 ]  Invoking a lambda
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143973 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585714176
+[ Node   8 ]  Calling sendTensors
+[ Node   4 ]  Calling sendTensors
+[ Node   0 ]  Invoking a lambda
+[ Node   4 ]  Calling sendTensors
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143973 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585714176
+[ Node   0 ]  Invoking a lambda
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143973 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585714176
+[ Node   4 ]  Calling sendTensors
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143973 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585714176
+[ Node   1 ]  Calling sendTensors
+[ Node   2 ]  Calling sendTensors
+[ Node   1 ]  Calling sendTensors
+[ Node   3 ]  Calling sendTensors
+[ Node   1 ]  Calling sendTensors
+[ Node   3 ]  Calling sendTensors
+[ Node   3 ]  Calling sendTensors
+[ Node   3 ]  Calling sendTensors
+[ Node   1 ]  Calling sendTensors
+[ Node   1 ]  Calling sendTensors
+[ Node   3 ]  Calling sendTensors
+[ Node   8 ]  Calling recvTensors
+[ Node   8 ]  recvTensors has exist of 1
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of z
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of h
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  Sending sucess ack
+[ Node   3 ]  Calling recvTensors
+[ Node   3 ]  recvTensors has exist of 1
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of z
+[ Node   6 ]  Calling recvTensors
+[ Node   6 ]  recvTensors has exist of 1
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of z
+[ Node   9 ]  Calling recvTensors
+[ Node   9 ]  recvTensors has exist of 1
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of z
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of h
+[ Node   4 ]  Calling recvTensors
+[ Node   4 ]  recvTensors has exist of 1
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of z
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of h
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of h
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  Sending sucess ack
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of h
+[ Node   5 ]  Calling recvTensors
+[ Node   5 ]  recvTensors has exist of 1
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of z
+[ Node   2 ]  Calling recvTensors
+[ Node   2 ]  recvTensors has exist of 1
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of z
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  Sending sucess ack
+[ Node   6 ]  Calling recvTensors
+[ Node   6 ]  recvTensors has exist of 1
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of z
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  Sending sucess ack
+[ Node   9 ]  Calling recvTensors
+[ Node   9 ]  recvTensors has exist of 1
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of z
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  Sending sucess ack
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of h
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of h
+[ Node   4 ]  Calling recvTensors
+[ Node   4 ]  recvTensors has exist of 1
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of z
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of h
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of h
+[ Node   7 ]  Calling recvTensors
+[ Node   7 ]  recvTensors has exist of 1
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of z
+[ Node   3 ]  Calling recvTensors
+[ Node   3 ]  recvTensors has exist of 1
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of z
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  Sending sucess ack
+[ Node   5 ]  Calling recvTensors
+[ Node   5 ]  recvTensors has exist of 1
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of z
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  Sending sucess ack
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of h
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  Sending sucess ack
+[ Node   6 ]  Calling recvTensors
+[ Node   6 ]  recvTensors has exist of 1
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of z
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  Sending sucess ack
+[ Node   9 ]  Calling recvTensors
+[ Node   9 ]  recvTensors has exist of 1
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of z
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of h
+[ Node   8 ]  Calling recvTensors
+[ Node   8 ]  recvTensors has exist of 1
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of z
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of h
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  Sending sucess ack
+[ Node   4 ]  Calling recvTensors
+[ Node   4 ]  recvTensors has exist of 1
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of z
+[ Node   2 ]  Calling recvTensors
+[ Node   2 ]  recvTensors has exist of 1
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of z
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of h
+[ Node   1 ]  Calling recvTensors
+[ Node   1 ]  recvTensors has exist of 1
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of z
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of h
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  Sending sucess ack
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of h
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of h
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  Sending sucess ack
+[ Node   3 ]  Calling recvTensors
+[ Node   3 ]  recvTensors has exist of 1
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of z
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of h
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  Sending sucess ack
+[ Node   6 ]  Calling recvTensors
+[ Node   6 ]  recvTensors has exist of 1
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of z
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of h
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of h
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  Sending sucess ack
+[ Node   5 ]  Calling recvTensors
+[ Node   5 ]  recvTensors has exist of 1
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of z
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  Sending sucess ack
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  Sending sucess ack
+[ Node   8 ]  Calling recvTensors
+[ Node   8 ]  recvTensors has exist of 1
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of z
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of h
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  Sending sucess ack
+[ Node   4 ]  Calling recvTensors
+[ Node   4 ]  recvTensors has exist of 1
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of z
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of h
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  Sending sucess ack
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  Sending sucess ack
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of h
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of h
+[ Node   1 ]  Calling recvTensors
+[ Node   1 ]  recvTensors has exist of 1
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of z
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  Sending sucess ack
+[ Node   3 ]  Calling recvTensors
+[ Node   3 ]  recvTensors has exist of 1
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of z
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of h
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  Sending sucess ack
+[ Node   6 ]  Calling recvTensors
+[ Node   6 ]  recvTensors has exist of 1
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of z
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  Sending sucess ack
+[ Node   8 ]  Calling recvTensors
+[ Node   8 ]  recvTensors has exist of 1
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of z
+[ Node   7 ]  Calling recvTensors
+[ Node   7 ]  recvTensors has exist of 1
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of z
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  Sending sucess ack
+[ Node   5 ]  Calling recvTensors
+[ Node   5 ]  recvTensors has exist of 1
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of z
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of h
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of h
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  Sending sucess ack
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of h
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of h
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of h
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  Sending sucess ack
+[ Node   1 ]  Calling recvTensors
+[ Node   1 ]  recvTensors has exist of 1
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of z
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of h
+[ Node   2 ]  Calling recvTensors
+[ Node   2 ]  recvTensors has exist of 1
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of z
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  Sending sucess ack
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  Sending sucess ack
+[ Node   6 ]  Calling recvTensors
+[ Node   6 ]  recvTensors has exist of 1
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of z
+[ Node   9 ]  Calling recvTensors
+[ Node   9 ]  recvTensors has exist of 1
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of z
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  Sending sucess ack
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  Sending sucess ack
+[ Node   7 ]  Calling recvTensors
+[ Node   7 ]  recvTensors has exist of 1
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of z
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of h
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of h
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  Sending sucess ack
+[ Node   5 ]  Calling recvTensors
+[ Node   5 ]  recvTensors has exist of 1
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of z
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of h
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of h
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  Sending sucess ack
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of h
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  Sending sucess ack
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  Sending sucess ack
+[ Node   6 ]  Calling recvTensors
+[ Node   6 ]  recvTensors has exist of 1
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of z
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of h
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  Sending sucess ack
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  Sending sucess ack
+[ Node   7 ]  Calling recvTensors
+[ Node   7 ]  recvTensors has exist of 1
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of z
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of h
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  Sending sucess ack
+[ Node   5 ]  Calling recvTensors
+[ Node   5 ]  recvTensors has exist of 1
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of z
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of h
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  Sending sucess ack
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of h
+[ Node   1 ]  Calling recvTensors
+[ Node   1 ]  recvTensors has exist of 1
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of z
+[ Node   2 ]  Calling recvTensors
+[ Node   2 ]  recvTensors has exist of 1
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of z
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  Sending sucess ack
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  Sending sucess ack
+[ Node   5 ]  Calling recvTensors
+[ Node   5 ]  recvTensors has exist of 1
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of z
+[ Node   4 ]  Calling recvTensors
+[ Node   4 ]  recvTensors has exist of 1
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of z
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of h
+[ Node   6 ]  Calling recvTensors
+[ Node   6 ]  recvTensors has exist of 1
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of z
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of h
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of h
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  recvTensors calling recvTensor
+[ Node   6 ]  recvTensor trying to read header
+[ Node   6 ]  recvTensor trying to read data
+[ Node   6 ]  recvTensor got name of h
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of h
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  Sending sucess ack
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  Sending sucess ack
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  Sending sucess ack
+[ Node   6 ]  recvTensor returned 0
+[ Node   6 ]  Sending sucess ack
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  Sending sucess ack
+[ Node   9 ]  Calling recvTensors
+[ Node   9 ]  recvTensors has exist of 1
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of z
+[ Node   8 ]  Calling recvTensors
+[ Node   8 ]  recvTensors has exist of 1
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of z
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of h
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of h
+[ Node   5 ]  Calling recvTensors
+[ Node   5 ]  recvTensors has exist of 1
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of z
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  Sending sucess ack
+[ Node   9 ]  Calling recvTensors
+[ Node   9 ]  recvTensors has exist of 1
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of z
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  Sending sucess ack
+[ Node   8 ]  Calling recvTensors
+[ Node   8 ]  recvTensors has exist of 1
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of z
+[ Node   7 ]  Calling recvTensors
+[ Node   7 ]  recvTensors has exist of 1
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of z
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  recvTensors calling recvTensor
+[ Node   5 ]  recvTensor trying to read header
+[ Node   5 ]  recvTensor trying to read data
+[ Node   5 ]  recvTensor got name of h
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of h
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of h
+[ Node   2 ]  Calling recvTensors
+[ Node   2 ]  recvTensors has exist of 1
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of z
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of h
+[ Node   5 ]  recvTensor returned 0
+[ Node   5 ]  Sending sucess ack
+[ Node   4 ]  Calling recvTensors
+[ Node   4 ]  recvTensors has exist of 1
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of z
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  Sending sucess ack
+[ Node   9 ]  Calling recvTensors
+[ Node   9 ]  recvTensors has exist of 1
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of z
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  Sending sucess ack
+[ Node   8 ]  Calling recvTensors
+[ Node   8 ]  recvTensors has exist of 1
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of z
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of h
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  Sending sucess ack
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of h
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of h
+[ Node   7 ]  Calling recvTensors
+[ Node   7 ]  recvTensors has exist of 1
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of z
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of h
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  Sending sucess ack
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  Sending sucess ack
+[ Node   4 ]  Calling recvTensors
+[ Node   4 ]  recvTensors has exist of 1
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of z
+[ Node   2 ]  Calling recvTensors
+[ Node   2 ]  recvTensors has exist of 1
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of z
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  Sending sucess ack
+[ Node   9 ]  Calling recvTensors
+[ Node   9 ]  recvTensors has exist of 1
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of z
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of h
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  Sending sucess ack
+[ Node   8 ]  Calling recvTensors
+[ Node   8 ]  recvTensors has exist of 1
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of z
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of h
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of h
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  recvTensors calling recvTensor
+[ Node   9 ]  recvTensor trying to read header
+[ Node   9 ]  recvTensor trying to read data
+[ Node   9 ]  recvTensor got name of h
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  Sending sucess ack
+[ Node   7 ]  Calling recvTensors
+[ Node   7 ]  recvTensors has exist of 1
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of z
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  recvTensors calling recvTensor
+[ Node   8 ]  recvTensor trying to read header
+[ Node   8 ]  recvTensor trying to read data
+[ Node   8 ]  recvTensor got name of h
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  Sending sucess ack
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  Sending sucess ack
+[ Node   2 ]  Calling recvTensors
+[ Node   2 ]  recvTensors has exist of 1
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of z
+[ Node   9 ]  recvTensor returned 0
+[ Node   9 ]  Sending sucess ack
+[ Node   8 ]  recvTensor returned 0
+[ Node   8 ]  Sending sucess ack
+[ Node   4 ]  Calling recvTensors
+[ Node   4 ]  recvTensors has exist of 1
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of z
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of h
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of h
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  recvTensors calling recvTensor
+[ Node   4 ]  recvTensor trying to read header
+[ Node   4 ]  recvTensor trying to read data
+[ Node   4 ]  recvTensor got name of h
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  Sending sucess ack
+[ Node   7 ]  Calling recvTensors
+[ Node   7 ]  recvTensors has exist of 1
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of z
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  Sending sucess ack
+[ Node   4 ]  recvTensor returned 0
+[ Node   4 ]  Sending sucess ack
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  recvTensors calling recvTensor
+[ Node   7 ]  recvTensor trying to read header
+[ Node   7 ]  recvTensor trying to read data
+[ Node   7 ]  recvTensor got name of h
+[ Node   2 ]  Calling recvTensors
+[ Node   2 ]  recvTensors has exist of 1
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of z
+[ Node   3 ]  Calling recvTensors
+[ Node   3 ]  recvTensors has exist of 1
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of z
+[ Node   7 ]  recvTensor returned 0
+[ Node   7 ]  Sending sucess ack
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  recvTensors calling recvTensor
+[ Node   2 ]  recvTensor trying to read header
+[ Node   2 ]  recvTensor trying to read data
+[ Node   2 ]  recvTensor got name of h
+[ Node   1 ]  Calling recvTensors
+[ Node   1 ]  recvTensors has exist of 1
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of z
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of h
+[ Node   2 ]  recvTensor returned 0
+[ Node   2 ]  Sending sucess ack
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of h
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  Sending sucess ack
+[ Node   3 ]  Calling recvTensors
+[ Node   3 ]  recvTensors has exist of 1
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of z
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  Sending sucess ack
+[ Node   1 ]  Calling recvTensors
+[ Node   1 ]  recvTensors has exist of 1
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of z
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of h
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of h
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  Sending sucess ack
+[ Node   3 ]  Calling recvTensors
+[ Node   3 ]  recvTensors has exist of 1
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of z
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  Sending sucess ack
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of h
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  Sending sucess ack
+[ Node   3 ]  Calling recvTensors
+[ Node   3 ]  recvTensors has exist of 1
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of z
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  recvTensors calling recvTensor
+[ Node   3 ]  recvTensor trying to read header
+[ Node   3 ]  recvTensor trying to read data
+[ Node   3 ]  recvTensor got name of h
+[ Node   1 ]  Calling recvTensors
+[ Node   1 ]  recvTensors has exist of 1
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of z
+[ Node   3 ]  recvTensor returned 0
+[ Node   3 ]  Sending sucess ack
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of h
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  Sending sucess ack
+[ Node   1 ]  Calling recvTensors
+[ Node   1 ]  recvTensors has exist of 1
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of z
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  recvTensors calling recvTensor
+[ Node   1 ]  recvTensor trying to read header
+[ Node   1 ]  recvTensor trying to read data
+[ Node   1 ]  recvTensor got name of h
+[ Node   1 ]  recvTensor returned 0
+[ Node   1 ]  Sending sucess ack
+[ Node   0 ]  curr 109617, timed 109345, chunk 1:F:0:0/0: vtx 1
+[ Node   0 ]  Relaunch lambda 1:F:0:0/0: vtx 1 for layer 0...
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143973 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585714176
+[ Node   0 ]  curr 109426, timed 109345, chunk 1:F:0:5/5: vtx 1
+[ Node   0 ]  Relaunch lambda 1:F:0:5/5: vtx 1 for layer 0...
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143973 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585714176
+[ Node   0 ]  curr 109529, timed 109345, chunk 1:F:0:0/0: vtx 1
+[ Node   0 ]  Relaunch lambda 1:F:0:0/0: vtx 1 for layer 0...
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143973 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585714176
+[ Node   0 ]  curr 109529, timed 109345, chunk 1:F:0:5/5: vtx 1
+[ Node   0 ]  Relaunch lambda 1:F:0:5/5: vtx 1 for layer 0...
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143973 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585714176
+[ Node   0 ]  curr 109528, timed 109345, chunk 1:F:0:0/0: vtx 1
+[ Node   0 ]  Relaunch lambda 1:F:0:0/0: vtx 1 for layer 0...
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143973 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585714176
+[ Node   0 ]  curr 109529, timed 109345, chunk 1:F:0:5/5: vtx 1
+[ Node   0 ]  Relaunch lambda 1:F:0:5/5: vtx 1 for layer 0...
+[ Node   0 ]  Calling send tensors
+[ Node   0 ]  sendTensors has exist of 1
+[ Node   0 ]  Inside of exist if statement
+[ Node   0 ]  Getting feat layer 0
+[ Node   0 ]  Got message of size 2
+[ Node   0 ]  Got name of ah and of size 2
+[ Node   0 ]  Found has val of 1 for name ah
+[ Node   0 ]  Calling sendTensor with more of 1
+[ Node   0 ]  Rows of 1143973 and Cols of 128
+[ Node   0 ]  Sending tensor header of size 28
+[ Node   0 ]  Sending tensor data of size 585714176

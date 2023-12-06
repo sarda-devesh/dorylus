@@ -39,22 +39,23 @@ public:
 
     // Listens on lambda threads' request for weights.
     void work();
+    void lambda_worker();
 
 private:
-    void sendTensor(Matrix& tensor, unsigned& more);
-    void sendTensors(zmq::message_t& client_id, Chunk &chunk);
+    void sendTensor(zmq::socket_t& socket, Matrix& tensor, unsigned& more);
+    void sendTensors(zmq::socket_t& socket, zmq::message_t& client_id, Chunk &chunk);
 
-    void recvUpdateTensor(Chunk &chunk, WeightTensorMap& weights);
-    void recvTensors(zmq::message_t& client_id, Chunk &chunk);
-
-    void recvEvalData(zmq::message_t& client_id, Chunk &chunk);
-
-    void setNumLambdas(zmq::message_t& client_id, unsigned numLambdas_);
-    void terminateServer(zmq::message_t& client_id);
+    void recvUpdateTensor(zmq::socket_t& socket, Chunk &chunk, WeightTensorMap& weights);
+    void recvTensors(zmq::socket_t& socket, zmq::message_t& client_id, Chunk &chunk);
+    void recvEvalData(zmq::socket_t& socket, zmq::message_t& client_id, Chunk &chunk);
+    
+    void setNumLambdas(zmq::socket_t& socket, zmq::message_t& client_id, unsigned numLambdas_);
+    void terminateServer(zmq::socket_t& socket, zmq::message_t& client_id);
 
     unsigned tid;
     zmq::context_t &ctx;
     zmq::socket_t workersocket;
+    zmq::socket_t lambdasocket;
 
     // Reference back to weight server so we can tell it to average and apply
     // final weight gradients.

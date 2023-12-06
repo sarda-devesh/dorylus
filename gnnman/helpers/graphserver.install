@@ -22,3 +22,5 @@ source blas.install
 # AWSSDK Install
 cd ${HOME}/dorylus/gnnman/helpers/
 source aws-cpp-sdk.install
+
+sudo apt-get install -y libzmq3-dev

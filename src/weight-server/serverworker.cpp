@@ -9,25 +9,89 @@ static void nofree(void* data, void* hint) {}
  *
  */
 ServerWorker::ServerWorker(zmq::context_t& ctx_, WeightServer& _ws, unsigned _tid)
-    : tid(_tid), ctx(ctx_), workersocket(ctx, ZMQ_DEALER), ws(_ws) {
+    : tid(_tid), ctx(ctx_), workersocket(ctx, ZMQ_DEALER), ws(_ws), lambdasocket(ctx, ZMQ_REP) {
     workersocket.setsockopt(ZMQ_BACKLOG, 500);
     workersocket.connect("inproc://backend");
-}
 
+    // Listen for incoming requests
+    if(_tid == 0) {
+        char port[50];
+        std::cout << "Lambda socket connecting to tcp://*:9000" << std::endl;
+        sprintf(port, "tcp://*:9000");
+        lambdasocket.bind(port);
+    }   
+}
 
 ServerWorker::~ServerWorker() {
     workersocket.setsockopt(ZMQ_LINGER, 0);
     workersocket.close();
+
+    lambdasocket.setsockopt(ZMQ_LINGER, 0);
+    lambdasocket.close();
 }
 
+void ServerWorker::lambda_worker() {
+    // std::cout << "[ Weight ] Starts listening for lambdas' requests..." << std::endl;
+    try {
+        while (true) {
+            zmq::message_t identity;
+            zmq::message_t header;
+            // std::cout << "Lambda socket listening for messages " << std::endl;
+
+            lambdasocket.recv(&identity);
+            lambdasocket.recv(&header);
+
+            OP op = parse<OP>((char *) header.data(), 0);
+            std::cout << "Got OP of " << op << std::endl;
+
+            switch (op) {
+                case (OP::PUSH): {
+                    Chunk chunk;
+                    memcpy(&chunk, (char *)header.data() + sizeof(OP), sizeof(Chunk));
+                    std::cout << "Calling recvTensors " << std::endl;
+                    recvTensors(lambdasocket, identity, chunk);
+                    break;
+                }
+                case (OP::PULL): {
+                    Chunk chunk;
+                    memcpy(&chunk, (char *)header.data() + sizeof(OP), sizeof(Chunk));
+                    std::cout << "Calling sendTensors " << std::endl;
+                    sendTensors(lambdasocket, identity, chunk);
+                    break;
+                }
+                case (OP::EVAL): {
+                    Chunk chunk;
+                    memcpy(&chunk, (char *)header.data() + sizeof(OP), sizeof(Chunk));
+                    std::cout << "Calling recvEvalData " << std::endl;
+                    recvEvalData(lambdasocket, identity, chunk);
+                    break;
+                }
+                case (OP::INFO): { // Used to tell how many lambda threads it should expect for this round.
+                    unsigned arg = parse<unsigned>((char *)header.data(), 1);
+                    std::cout << "Calling setNumLambdas " << std::endl;
+                    setNumLambdas(lambdasocket, identity, arg);
+                    break;
+                }
+                case (OP::TERM): {
+                    std::cout << "Calling terminateServer " << std::endl;
+                    terminateServer(lambdasocket, identity);
+                    break;
+                }
+                default: {
+                    std::cout << "Unknown op " << op << std::endl;
+                    break;  /** Not an op that I care about. */
+                }
+            }
+        }
+    } catch (std::exception& ex) { /** Context Termintated. */ }
+}
 
 /**
  *
  * Listen on lambda threads' requests.
  *
  */
-void
-ServerWorker::work() {
+void ServerWorker::work() {
     // std::cout << "[ Weight ] Starts listening for lambdas' requests..." << std::endl;
     try {
         while (true) {
@@ -37,38 +101,43 @@ ServerWorker::work() {
             workersocket.recv(&header);
 
             OP op = parse<OP>((char *) header.data(), 0);
+            std::cout << "Got OP of " << op << std::endl;
 
             switch (op) {
                 case (OP::PUSH): {
                     Chunk chunk;
                     memcpy(&chunk, (char *)header.data() + sizeof(OP), sizeof(Chunk));
-                    recvTensors(identity, chunk);
+                    std::cout << "Calling recvTensors " << std::endl;
+                    recvTensors(workersocket, identity, chunk);
                     break;
                 }
                 case (OP::PULL): {
                     Chunk chunk;
                     memcpy(&chunk, (char *)header.data() + sizeof(OP), sizeof(Chunk));
-                    sendTensors(identity, chunk);
+                    std::cout << "Calling sendTensors " << std::endl;
+                    sendTensors(workersocket, identity, chunk);
                     break;
                 }
                 case (OP::EVAL): {
                     Chunk chunk;
                     memcpy(&chunk, (char *)header.data() + sizeof(OP), sizeof(Chunk));
-                    recvEvalData(identity, chunk);
+                    std::cout << "Calling recvEvalData " << std::endl;
+                    recvEvalData(workersocket, identity, chunk);
                     break;
                 }
                 case (OP::INFO): { // Used to tell how many lambda threads it should expect for this round.
                     unsigned arg = parse<unsigned>((char *)header.data(), 1);
-                    setNumLambdas(identity, arg);
+                    std::cout << "Calling setNumLambdas " << std::endl;
+                    setNumLambdas(workersocket, identity, arg);
                     break;
                 }
                 case (OP::TERM): {
-                    terminateServer(identity);
+                    std::cout << "Calling terminateServer " << std::endl;
+                    terminateServer(workersocket, identity);
                     break;
                 }
                 default: {
-                    std::cout << "Unknown op, message size: " << identity.size() << " " <<
-                    header.size() << std::endl;
+                    std::cout << "Unknown op " << op << std::endl;
                     break;  /** Not an op that I care about. */
                 }
             }
@@ -77,52 +146,58 @@ ServerWorker::work() {
 }
 
 
-void ServerWorker::sendTensors(zmq::message_t& client_id, Chunk &chunk) {
+void ServerWorker::sendTensors(zmq::socket_t& socket, zmq::message_t& client_id, Chunk &chunk) {
     if (ws.BLOCK && chunk.dir == PROP_TYPE::FORWARD && chunk.epoch * 2 > ws.epoch) {
         while (chunk.epoch * 2 > ws.epoch) {
             usleep(50 * 1000); // sleep 50ms
         }
     }
+
     unsigned more = 1;
-    workersocket.send(client_id, ZMQ_SNDMORE);
     unsigned featLayer = chunk.vertex ? chunk.layer : chunk.layer - 1;
     // unsigned featLayer = chunk.layer;
     WeightTensorMap& weights = ws.weightsStore[featLayer];
-    while (more) {
-        zmq::message_t tensorHeader(TENSOR_HDR_SIZE);
-        workersocket.recv(&tensorHeader);
 
-        std::string name = parseName((char*)tensorHeader.data());
+    while (more) {
+        // std::cout << "Listening for incoming header" << std::endl;
+        zmq::message_t tensorHeader;
+        socket.recv(&tensorHeader);
+        // std::cout << "Got tensorHeader of size " << tensorHeader.size() << std::endl;
+
+        std::string name = std::string(static_cast<char*>(tensorHeader.data()), tensorHeader.size());
+        // std::cout << "Got name of " << name << std::endl;
+
         auto found = weights.find(name);
         if (found == weights.end()) {
             std::cerr << "Requested tensor '" << name << "' not found" << std::endl;
             zmq::message_t errorHeader(TENSOR_HDR_SIZE);
             populateHeader(errorHeader.data(), ERR_HEADER_FIELD, name.c_str());
-            workersocket.send(errorHeader);
+            socket.send(errorHeader);
             return;
         } else {
             Matrix& reqMatrix = found->second.getMat(chunk);
-            sendTensor(reqMatrix, more);
+            // std::cout << "Calling sendTensor" << std::endl;
+            sendTensor(socket, reqMatrix, more);
         }
     }
 }
 
-void ServerWorker::recvTensors(zmq::message_t& client_id, Chunk &chunk) {
+void ServerWorker::recvTensors(zmq::socket_t& socket, zmq::message_t& client_id, Chunk &chunk) {
     unsigned more = 1;
     unsigned featLayer = chunk.vertex ? chunk.layer : chunk.layer - 1;
     // unsigned featLayer = chunk.layer;
     WeightTensorMap& weights = ws.weightsStore[featLayer];
     while (more) {
-        recvUpdateTensor(chunk, weights);
+        recvUpdateTensor(socket, chunk, weights);
 
         size_t usize = sizeof(more);
-        workersocket.getsockopt(ZMQ_RCVMORE, &more, &usize);
+        socket.getsockopt(ZMQ_RCVMORE, &more, &usize);
     }
 }
 
-void ServerWorker::recvEvalData(zmq::message_t& client_id, Chunk &chunk) {
+void ServerWorker::recvEvalData(zmq::socket_t& socket, zmq::message_t& client_id, Chunk &chunk) {
     zmq::message_t evalMsg(2 * sizeof(float));
-    workersocket.recv(&evalMsg);
+    socket.recv(&evalMsg);
 
     float acc = *((float *)evalMsg.data());
     float loss = *(((float *)evalMsg.data()) + 1);
@@ -130,30 +205,33 @@ void ServerWorker::recvEvalData(zmq::message_t& client_id, Chunk &chunk) {
     ws.updateLocalAccLoss(chunk, acc, loss);
 }
 
-void ServerWorker::sendTensor(Matrix& tensor, unsigned& more) {
+void ServerWorker::sendTensor(zmq::socket_t& socket, Matrix& tensor, unsigned& more) {
     zmq::message_t responseHeader(TENSOR_HDR_SIZE);
     populateHeader(responseHeader.data(), OP::PULL, tensor.name().c_str(),
       tensor.getRows(), tensor.getCols());
     unsigned bufSize = tensor.getRows() * tensor.getCols() * sizeof(FeatType);
     zmq::message_t tensorData(tensor.getData(), bufSize, nofree, NULL);
 
-    workersocket.send(responseHeader, ZMQ_SNDMORE);
+    // std::cout << "Sending tensor response header of size " << responseHeader.size() << std::endl;
+    socket.send(responseHeader, ZMQ_SNDMORE);
 
     size_t usize = sizeof(unsigned);
-    workersocket.getsockopt(ZMQ_RCVMORE, &more, &usize);
+    socket.getsockopt(ZMQ_RCVMORE, &more, &usize);
+    // std::cout << "Sending tensor data of size " << tensorData.size() << std::endl;
+
     if (!more) {
-        workersocket.send(tensorData);
+        socket.send(tensorData);
     } else {
-        workersocket.send(tensorData, ZMQ_SNDMORE);
+        socket.send(tensorData, ZMQ_SNDMORE);
     }
 }
 
-void ServerWorker::recvUpdateTensor(Chunk &chunk, WeightTensorMap& weights) {
+void ServerWorker::recvUpdateTensor(zmq::socket_t& socket, Chunk &chunk, WeightTensorMap& weights) {
     zmq::message_t tensorHeader(TENSOR_HDR_SIZE);
     zmq::message_t tensorData;
 
-    workersocket.recv(&tensorHeader);
-    workersocket.recv(&tensorData);
+    socket.recv(&tensorHeader);
+    socket.recv(&tensorData);
 
     std::string name = parseName((char*)tensorHeader.data());
     auto found = weights.find(name);
@@ -180,11 +258,11 @@ void ServerWorker::recvUpdateTensor(Chunk &chunk, WeightTensorMap& weights) {
  *
  */
 void
-ServerWorker::setNumLambdas(zmq::message_t& client_id, unsigned numLambdas) {
+ServerWorker::setNumLambdas(zmq::socket_t& socket, zmq::message_t& client_id, unsigned numLambdas) {
     // Send confirm ACK message.
     zmq::message_t confirm;
-    workersocket.send(client_id, ZMQ_SNDMORE);
-    workersocket.send(confirm);
+    socket.send(client_id, ZMQ_SNDMORE);
+    socket.send(confirm);
 
     ws.setLocalUpdTot(numLambdas);
     ws.clearAccLoss();
@@ -199,7 +277,7 @@ ServerWorker::setNumLambdas(zmq::message_t& client_id, unsigned numLambdas) {
  *
  */
 void
-ServerWorker::terminateServer(zmq::message_t& client_id) {
+ServerWorker::terminateServer(zmq::socket_t& socket, zmq::message_t& client_id) {
     std::cerr << "[SHUTDOWN] Server shutting down..." << std::endl;
 
     std::lock_guard<std::mutex> lk(ws.termMtx);

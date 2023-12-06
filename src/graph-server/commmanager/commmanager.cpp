@@ -28,6 +28,7 @@ CommManager::init(NodeManager& nodeManager, unsigned ctxThds) {
     dataPublisher->setsockopt(ZMQ_RCVHWM, 0);
     char hostPort[50];
     sprintf(hostPort, "tcp://%s:%u", me.ip.c_str(), dataPort);
+    // printLog(nodeId, "Data port binding to %d", dataPort); 
     dataPublisher->bind(hostPort);
 
     dataSubscriber = new zmq::socket_t(dataContext, ZMQ_SUB);
@@ -63,6 +64,7 @@ CommManager::init(NodeManager& nodeManager, unsigned ctxThds) {
         char hostPort[50];
         int prt = controlPortStart + i;
         sprintf(hostPort, "tcp://%s:%d", me.ip.c_str(), prt);
+        // printLog(nodeId, "Host port binding to port %d", prt);
         controlPublishers[i]->bind(hostPort);
 
         controlSubscribers[i] = new zmq::socket_t(controlContext, ZMQ_SUB);

@@ -4,17 +4,20 @@
 ## Install requried dependencies on a weight server. TO be invoked on the remote machine.
 ##
 
-
 # Basic packages.
 cd ${HOME}/dorylus/gnnman/helpers/
 source basic.install
-
 
 # ZeroMQ stuff.
 cd ${HOME}/dorylus/gnnman/helpers/
 source zmq.install
 
-
 # BLAS stuff.
 cd ${HOME}/dorylus/gnnman/helpers/
 source blas.install
+
+# AWSSDK Install
+cd ${HOME}/dorylus/gnnman/helpers/
+source aws-cpp-sdk.install
+
+sudo apt-get install -y libzmq3-dev

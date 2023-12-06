@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 
 FIND_PACKAGE(OpenMP)
+FIND_PACKAGE(ZLIB)
+
 # Options.
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DVERBOSE_ERRORS -fno-omit-frame-pointer -fsanitize=address")

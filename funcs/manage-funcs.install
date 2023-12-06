@@ -1,0 +1,26 @@
+#!/bin/bash
+
+##
+## Install requried dependencies on a machine that can compile and manage lambda functions.
+##
+
+
+# Basic packages.
+cd ${HOME}/dorylus/gnnman/helpers/
+source basic.install
+
+
+# ZeroMQ
+cd ${HOME}/dorylus/gnnman/helpers/
+source zmq.install
+
+
+# AWS Dependencies
+cd ${HOME}/dorylus/gnnman/helpers/
+source aws-cpp-sdk.install
+source aws-lambda-runtime.install
+
+
+# BLAS
+cd ${HOME}/dorylus/gnnman/helpers/
+source blas.install

@@ -1,0 +1,8 @@
+#! /bin/bash
+
+WEIGHTSERVER=ubuntu@172.31.21.193
+GRAPHSERVER=ubuntu@172.31.27.242
+
+cd ${HOME}
+dsh -m ${GRAPHSERVER} "./dorylus/run/kill-zombies graph"
+dsh -m ${WEIGHTSERVER} "./dorylus/run/kill-zombies weight"

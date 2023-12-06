@@ -28,6 +28,7 @@ void Engine::preallocateGCN() {
     unsigned vtxCnt = graph.localVtxCnt;
 
     // Store input tesnors
+    // printLog(nodeId, "Start storing input tensors");
     savedNNTensors[0]["x"] =
         Matrix(vtxCnt, getFeatDim(0), forwardVerticesInitData);
     savedNNTensors[0]["fg"] =
@@ -38,8 +39,10 @@ void Engine::preallocateGCN() {
     FeatType **eVFeatsTensor = srcVFeats2eFeats(
         forwardVerticesInitData, forwardGhostInitData, vtxCnt, getFeatDim(0));
     savedEdgeTensors[0]["fedge"] = eVFeatsTensor;
+    // printLog(nodeId, "Finished storing input tensors");
 
     // forward tensor allocation
+    // printLog(nodeId, "Start forward tensor allocation");
     for (int layer = 0; layer < numLayers; ++layer) {
         unsigned featDim = getFeatDim(layer);
         unsigned nextFeatDim = getFeatDim(layer + 1);
@@ -47,6 +50,7 @@ void Engine::preallocateGCN() {
         // GATHER TENSORS
         FeatType *ahTensor = new FeatType[vtxCnt * featDim];
         savedNNTensors[layer]["ah"] = Matrix("ah", vtxCnt, featDim, ahTensor);
+        // printLog(nodeId, "Finished forward gather for %d", layer);
 
         // APPLY TENSORS
         if (layer < numLayers - 1) {
@@ -55,6 +59,7 @@ void Engine::preallocateGCN() {
 
             savedNNTensors[layer]["z"] = Matrix(vtxCnt, nextFeatDim, zTensor);
             savedNNTensors[layer]["h"] = Matrix(vtxCnt, nextFeatDim, hTensor);
+            // printLog(nodeId, "Finished forward feat type for %d", layer);
 
             // SCATTER TENSORS
             FeatType *ghostTensor =
@@ -65,10 +70,13 @@ void Engine::preallocateGCN() {
             FeatType **edgeTensor =
                 srcVFeats2eFeats(hTensor, ghostTensor, vtxCnt, nextFeatDim);
             savedEdgeTensors[layer + 1]["fedge"] = edgeTensor;
+            // printLog(nodeId, "Finished forward gather for %d", layer);
         }
+        // printLog(nodeId, "Finished forward loop for %d", layer);
     }
 
     // backward tensor allocation
+    // printLog(nodeId, "Start backward tensor allocation");
     for (int layer = numLayers - 1; layer > 0; --layer) {
         unsigned featDim = getFeatDim(layer);
 
@@ -76,6 +84,7 @@ void Engine::preallocateGCN() {
         FeatType *gradTensor = new FeatType[vtxCnt * featDim];
         savedNNTensors[layer]["grad"] =
             Matrix("grad", vtxCnt, featDim, gradTensor);
+        // printLog(nodeId, "Finished backward apply for %d", layer);
 
         // SCATTER TENSORS
         FeatType *ghostTensor = new FeatType[graph.dstGhostCnt * featDim];
@@ -85,11 +94,14 @@ void Engine::preallocateGCN() {
         FeatType **eFeats =
             dstVFeats2eFeats(gradTensor, ghostTensor, vtxCnt, featDim);
         savedEdgeTensors[layer - 1]["bedge"] = eFeats;
+        // printLog(nodeId, "Finished backward scatter for %d", layer);
 
         // GATHER TENSORS
         FeatType *aTgTensor = new FeatType[vtxCnt * featDim];
         savedNNTensors[layer - 1]["aTg"] = Matrix(vtxCnt, featDim, aTgTensor);
+        // printLog(nodeId, "Finished backward gather for %d", layer);
     }
+    // printLog(nodeId, "Finished backward tensor allocation");
 }
 
 #ifdef _GPU_ENABLED_

@@ -23,10 +23,21 @@ EC2MAN_CMD="python3 -m ec2man"
 
 
 # For graph servers.
-echo "Processing context 'graph'..."
-${EC2MAN_CMD} graph all ssh -t "./dorylus/gnnman/helpers/graphserver.install"
+#echo "Processing context 'graph'..."
+#NUM_GRAPH_NODES=$(( $( ${EC2MAN_CMD} graph info | wc -l | awk '{print $1}' ) - 1 ))
+#for i in $( seq 0 $(( ${NUM_GRAPH_NODES} - 1 )) ); do
+#    sleep 15
+#    ${EC2MAN_CMD} graph $i ssh -t "./dorylus/gnnman/helpers/graphserver.install"
+#    sleep 15
+#done
 
 
 # For weight servers.
 echo "Processing context 'weight'..."
-${EC2MAN_CMD} weight all ssh -t "./dorylus/gnnman/helpers/weightserver.install"
+NUM_GRAPH_NODES=$(( $( ${EC2MAN_CMD} weight info | wc -l | awk '{print $1}' ) - 1 ))
+for i in $( seq 0 $(( ${NUM_GRAPH_NODES} - 1 )) ); do
+    sleep 15
+    ${EC2MAN_CMD} weight $i ssh -t "./dorylus/gnnman/helpers/weightserver.install"
+    sleep 15
+done
+

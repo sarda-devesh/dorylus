@@ -16,7 +16,7 @@ LambdaComm::LambdaComm(Engine *_engine) :
         savedNNTensors(_engine->savedNNTensors), savedETensors(_engine->savedEdgeTensors),
         timeoutRatio(_engine->timeoutRatio), LAMBDA_NAME(_engine->lambdaName),
         ctx(1), frontend(ctx, ZMQ_ROUTER), backend(ctx, ZMQ_DEALER),
-        numListeners(4), engine(_engine) { // TODO: Decide numListeners.
+        numListeners(1), engine(_engine) { // TODO: Decide numListeners.
     nodeId = _engine->nodeId;
 //    if (engine->gnn_type == GNN::GCN) {
 //        LAMBDA_NAME = "yifan-gcn";
@@ -47,20 +47,21 @@ LambdaComm::~LambdaComm() {
 }
 
 void LambdaComm::NNCompute(Chunk &chunk) {
-    // printLog(nodeId, "NNComp: chunk %s", chunk.str().c_str());
+    printLog(nodeId, "NNComp: chunk %s", chunk.str().c_str());
     timeoutMtx.lock();
     if (timeoutTable.find(chunk) != timeoutTable.end()) {
         printLog(nodeId, "ERROR! duplicated chunk %s", chunk.str().c_str());
     } else {
         timeoutTable[chunk] = timestamp_ms();
+        printLog(nodeId, "Invoking a lambda");
         invokeLambda(chunk);
     }
     timeoutMtx.unlock();
 }
 
 bool LambdaComm::NNRecv(Chunk &chunk) {
-    // printLog(nodeId, "NNRecv: %u:%u:%s", chunk.layer, chunk.localId,
-    //   chunk.dir == PROP_TYPE::FORWARD ? "F" : "B");
+    printLog(nodeId, "NNRecv: %u:%u:%s", chunk.layer, chunk.localId,
+        chunk.dir == PROP_TYPE::FORWARD ? "F" : "B");
     timeoutMtx.lock();
     auto entry = timeoutTable.find(chunk);
     if (entry == timeoutTable.end()) {
@@ -88,13 +89,14 @@ bool LambdaComm::NNRecv(Chunk &chunk) {
 }
 
 void LambdaComm::asyncRelaunchLoop() {
-#define MIN_TIMEOUT 500u     // at least wait for MIN_TIMEOUT ms before relaunching
-#define TIMEOUT_PERIOD 6000u // wait for up to TIMEOUT_PERIOD ms before relaunching
-#define SLEEP_PERIOD (MIN_TIMEOUT * 1000) // sleep SLEEP_PERIOD us and then check the condition.
+#define MIN_TIMEOUT 1000u     // at least wait for MIN_TIMEOUT ms before relaunching
+#define TIMEOUT_PERIOD 60000u // wait for up to TIMEOUT_PERIOD ms before relaunching
+#define SLEEP_PERIOD (MIN_TIMEOUT * 300) // sleep SLEEP_PERIOD us and then check the condition.
 
     if (!relaunching) return;
 
     while (!halt) {
+        usleep(SLEEP_PERIOD);
         unsigned currTS = timestamp_ms();
         for (auto &kv : timeoutTable) {
             auto found = recordTable.find(engine->getAbsLayer(kv.first));
@@ -117,7 +119,6 @@ void LambdaComm::asyncRelaunchLoop() {
                 }
             }
         }
-        usleep(SLEEP_PERIOD);
     }
 
 #undef MIN_TIMEOUT
@@ -240,10 +241,14 @@ void LambdaComm::setupSockets() {
     frontend.setsockopt(ZMQ_RCVHWM, 5000);
     frontend.setsockopt(ZMQ_SNDHWM, 5000);
     frontend.setsockopt(ZMQ_ROUTER_MANDATORY, 1);
+
+    printLog(nodeId, "Binding frontend to port %s", dhost_port.c_str());
     frontend.bind(dhost_port);
+
     backend.setsockopt(ZMQ_BACKLOG, 1000);
     backend.setsockopt(ZMQ_RCVHWM, 5000);
     backend.setsockopt(ZMQ_SNDHWM, 5000);
+    printLog(nodeId, "Binding backend to port inproc://backend");
     backend.bind("inproc://backend");
 }
 
